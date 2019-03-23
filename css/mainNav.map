@@ -1,0 +1,12 @@
+{
+	"version": 3,
+	"file": "../sass/mainNav.css",
+	"sources": [
+		"../sass/mainNav.scss"
+	],
+	"sourcesContent": [
+		".mainNav {\n    display: flex;\n    justify-content: space-evenly;\n    height: 42px;\n    list-style-type: none;\n    padding: 0;\n    li {\n        flex: 1 1 auto;\n        text-align: center;\n        padding: 10px;\n        a {\n            color: #222222;\n            font-size: 14px;\n            font-weight: 700;\n            line-height: 26px;\n            text-transform: uppercase;\n            text-decoration-line: none;\n            display: block;\n            &:hover {\n                border-bottom: 2px solid #f16d7f;\n                border-radius: 0;\n            }\n        }\n    }  \n}"
+	],
+	"mappings": ";AAAA,AAAA,QAAQ,CAAC;EACL,OAAO,EAAE,IAAK;EACd,eAAe,EAAE,YAAa;EAC9B,MAAM,EAAE,IAAK;EACb,eAAe,EAAE,IAAK;EACtB,OAAO,EAAE,CAAE,GAmBd;;EAxBD,AAMI,QANI,CAMJ,EAAE,CAAC;IACC,IAAI,EAAE,QAAS;IACf,UAAU,EAAE,MAAO;IACnB,OAAO,EAAE,IAAK,GAcjB;;IAvBL,AAUQ,QAVA,CAMJ,EAAE,CAIE,CAAC,CAAC;MACE,KAAK,EAAE,OAAQ;MACf,SAAS,EAAE,IAAK;MAChB,WAAW,EAAE,GAAI;MACjB,WAAW,EAAE,IAAK;MAClB,cAAc,EAAE,SAAU;MAC1B,oBAAoB,EAAE,IAAK;MAC3B,OAAO,EAAE,KAAM,GAKlB;;MAtBT,AAUQ,QAVA,CAMJ,EAAE,CAIE,CAAC,AAQI,MAAM,CAAC;QACJ,aAAa,EAAE,iBAAkB;QACjC,aAAa,EAAE,CAAE,GACpB",
+	"names": []
+}

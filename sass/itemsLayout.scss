@@ -1,0 +1,56 @@
+.itemsLayout {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    position: relative;
+    .item {
+        display: flex;
+        flex-direction: column;
+        width: 265px;
+        &:hover {
+            box-shadow: 0 5px 8px rgba(0, 0, 0, 0.16);
+            .fade {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+        .itemText {
+            padding: 20px;
+            h4 {
+                color: #6f6e6e;
+                font-size: 14px;
+                font-weight: 400;
+                text-transform: uppercase;
+                margin: 0;
+            }
+            h3 {
+                color: #f16d7f;
+                font-size: 16px;
+                font-weight: 700;
+                text-transform: uppercase;
+                margin-bottom: 0;
+            }
+        }
+        .fade {
+            display: none;
+            height: calc(100% - 92px);
+            width: inherit;
+            background: rgba(0, 0, 0, 0.5);
+            position: absolute;
+            button {
+                padding: 15px;
+                border: 1px solid #ffffff;
+                background: none;
+                color: white;
+                font-size: 13px;
+                font-weight: 700;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                outline: none;
+            }
+        }
+    }
+}

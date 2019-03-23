@@ -1,0 +1,27 @@
+/* line 1, /Users/aerozol/Documents/GitHub/JSAdvanced/sass/mainNav.scss */
+.mainNav {
+  display: flex;
+  justify-content: space-evenly;
+  height: 42px;
+  list-style-type: none;
+  padding: 0; }
+  /* line 7, /Users/aerozol/Documents/GitHub/JSAdvanced/sass/mainNav.scss */
+  .mainNav li {
+    flex: 1 1 auto;
+    text-align: center;
+    padding: 10px; }
+    /* line 11, /Users/aerozol/Documents/GitHub/JSAdvanced/sass/mainNav.scss */
+    .mainNav li a {
+      color: #222222;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 26px;
+      text-transform: uppercase;
+      text-decoration-line: none;
+      display: block; }
+      /* line 19, /Users/aerozol/Documents/GitHub/JSAdvanced/sass/mainNav.scss */
+      .mainNav li a:hover {
+        border-bottom: 2px solid #f16d7f;
+        border-radius: 0; }
+
+/*# sourceMappingURL=../css/mainNav.map */
