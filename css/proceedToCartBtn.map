@@ -5,8 +5,8 @@
 		"../sass/proceedToCartBtn.scss"
 	],
 	"sourcesContent": [
-		".proceedToCartBtn {\n    text-align: right;\n    padding: 15px 0;\n    button {\n        width: 235px;\n        height: 50px;\n        border: 1px solid #eaeaea;\n        background-color: #ffffff;\n        color: #4a4a4a;\n        font-size: 14px;\n        font-weight: 700;\n        outline: none;\n    }\n}"
+		".proceedToCartBtn {\n    text-align: right;\n    padding: 15px 0;\n    button {\n        width: 235px;\n        height: 50px;\n        border: 1px solid #eaeaea;\n        background-color: #ffffff;\n        color: #4a4a4a;\n        font-size: 14px;\n        font-weight: 700;\n        text-transform: uppercase;\n        outline: none;\n        cursor: pointer;\n    }\n}"
 	],
-	"mappings": ";AAAA,AAAA,iBAAiB,CAAC;EACd,UAAU,EAAE,KAAM;EAClB,OAAO,EAAE,MAAO,GAWnB;;EAbD,AAGI,iBAHa,CAGb,MAAM,CAAC;IACH,KAAK,EAAE,KAAM;IACb,MAAM,EAAE,IAAK;IACb,MAAM,EAAE,iBAAkB;IAC1B,gBAAgB,EAAE,OAAQ;IAC1B,KAAK,EAAE,OAAQ;IACf,SAAS,EAAE,IAAK;IAChB,WAAW,EAAE,GAAI;IACjB,OAAO,EAAE,IAAK,GACjB",
+	"mappings": ";AAAA,AAAA,iBAAiB,CAAC;EACd,UAAU,EAAE,KAAM;EAClB,OAAO,EAAE,MAAO,GAanB;;EAfD,AAGI,iBAHa,CAGb,MAAM,CAAC;IACH,KAAK,EAAE,KAAM;IACb,MAAM,EAAE,IAAK;IACb,MAAM,EAAE,iBAAkB;IAC1B,gBAAgB,EAAE,OAAQ;IAC1B,KAAK,EAAE,OAAQ;IACf,SAAS,EAAE,IAAK;IAChB,WAAW,EAAE,GAAI;IACjB,cAAc,EAAE,SAAU;IAC1B,OAAO,EAAE,IAAK;IACd,MAAM,EAAE,OAAQ,GACnB",
 	"names": []
 }
