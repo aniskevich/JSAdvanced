@@ -4,6 +4,9 @@ class Item {
         this.price = price;
         this.link = link;
     }
+    addToCart() {
+
+    }
     render() {
         return `<div class="item"><img src="${this.link}"><div class="itemText"><h4>${this.name}</h4>
         <h3>$${this.price}.00</h3></div><div class="fade"><button>Add to Cart</button></div></div>`;
@@ -15,17 +18,15 @@ class ItemsList {
         this.items = [];
     }
     getItems() {
-        this.items = [
-            {name: 'Coat', price: 500, link: 'images/product1.jpg'},
-            {name: 'Jacket', price: 300, link: 'images/product2.jpg'},
-            {name: 'Coat', price: 200, link: 'images/product3.jpg'},
-            {name: 'T-Shirt', price: 150, link: 'images/product4.jpg'},
-        ];
-        this.items = this.items.map(item => new Item(item.name, item.price, item.link));
+        return new Promise((resolve, reject) => {
+            sendRequest('http://localhost:3000/catalogData.json').then((response) => {
+                return this.items = JSON.parse(response).map(item => new Item(item.name, item.price, item.link));
+            }).then(() => resolve(this.items));
+        });        
     }
     render() {
         const itemsHtml = this.items.map(item => item.render());
-        return itemsHtml.join('');
+        return document.querySelector('.itemsLayout').innerHTML = itemsHtml.join('');   
     }
 }
 
@@ -58,16 +59,14 @@ class CartList {
     }
     render() {
         const itemsHtml = this.items.map(item => item.render());
-        return itemsHtml.join('');
+        return document.querySelector('.shopCart').innerHTML = itemsHtml.join('');
     }
     getItems() {
-        this.items = [
-            {name: 'Coat', price: 500, link: 'images/product1.jpg', color: 'red', size: 'L', quantity: 3, subtotal: 0},
-            {name: 'Jacket', price: 300, link: 'images/product2.jpg', color: 'red', size: 'L', quantity: 2, subtotal: 0},
-            {name: 'Coat', price: 200, link: 'images/product3.jpg', color: 'red', size: 'L', quantity: 1, subtotal: 0},
-            {name: 'T-Shirt', price: 150, link: 'images/product4.jpg', color: 'red', size: 'L', quantity: 2, subtotal: 0},
-        ];
-        this.items = this.items.map(item => new ItemInCart(item.name, item.price, item.link, item.color, item.size, item.quantity, item.subtotal));
+        return new Promise((resolve, reject) => {
+            sendRequest('http://localhost:3000/getBasket.json').then((response) => {
+                return this.items = JSON.parse(response).map(item => new ItemInCart(item.name, item.price, item.link, item.color, item.size, item.quantity, item.subtotal));
+            }).then(() => resolve(this.items));
+        }); 
     }
     getTotal() {
         return this.items.reduce((acc, item) => acc + item.subtotal, 0);
@@ -77,17 +76,34 @@ class CartList {
     }
 }
 
+function sendRequest(url) {
+    return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', url);
+        xhr.send();
+        xhr.onreadystatechange = () => {
+            if(xhr.readyState === XMLHttpRequest.DONE) {
+                if(xhr.status === 200) {
+                    resolve(xhr.responseText);
+                }
+                else {
+                    reject(alert(xhr.status));
+                }
+            }
+        }
+    }); 
+}
+
 function init() {
     const items = new ItemsList();
-    items.getItems();
-    document.querySelector('.itemsLayout').innerHTML = items.render();
+    items.getItems().then(()=>{items.render();});
+    
     const $proceedToCartBtn = document.createElement('button');
     document.querySelector('.proceedToCartBtn').appendChild($proceedToCartBtn);
     $proceedToCartBtn.innerHTML = 'Proceed to Cart';
 
     const cartItems = new CartList();
-    cartItems.getItems();
-    document.querySelector('.shopCart').innerHTML = cartItems.render(); 
+    cartItems.getItems().then(() => {cartItems.render();});
 }
 
 window.onload = function() {init()};
