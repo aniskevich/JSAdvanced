@@ -95,7 +95,9 @@
     color: #4a4a4a;
     font-size: 14px;
     font-weight: 700;
-    outline: none; }
+    text-transform: uppercase;
+    outline: none;
+    cursor: pointer; }
 
 /* line 4, /Users/aerozol/Documents/GitHub/JSAdvanced/sass/style.scss */
 body {
