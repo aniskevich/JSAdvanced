@@ -1,0 +1,15 @@
+.cartItem {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px auto;
+    .details {
+        display: flex;
+        img {
+            width: 100px;
+            height: 115px;
+        }
+    }
+}
+.total {
+    text-align: right;
+}

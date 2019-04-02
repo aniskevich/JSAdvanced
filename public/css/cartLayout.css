@@ -1,0 +1,12 @@
+.cartItem {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px auto; }
+  .cartItem .details {
+    display: flex; }
+    .cartItem .details img {
+      width: 100px;
+      height: 115px; }
+
+.total {
+  text-align: right; }
