@@ -1,17 +1,14 @@
 @import url("https://fonts.googleapis.com/css?family=Lato:300,400,700,900");
-/* line 1, /Users/aerozol/Documents/GitHub/JSAdvanced/sass/mainNav.scss */
 .mainNav {
   display: flex;
   justify-content: space-evenly;
   height: 42px;
   list-style-type: none;
   padding: 0; }
-  /* line 7, /Users/aerozol/Documents/GitHub/JSAdvanced/sass/mainNav.scss */
   .mainNav li {
     flex: 1 1 auto;
     text-align: center;
     padding: 10px; }
-    /* line 11, /Users/aerozol/Documents/GitHub/JSAdvanced/sass/mainNav.scss */
     .mainNav li a {
       color: #222222;
       font-size: 14px;
@@ -20,55 +17,45 @@
       text-transform: uppercase;
       text-decoration-line: none;
       display: block; }
-      /* line 19, /Users/aerozol/Documents/GitHub/JSAdvanced/sass/mainNav.scss */
       .mainNav li a:hover {
         border-bottom: 2px solid #f16d7f;
         border-radius: 0; }
 
-/* line 1, /Users/aerozol/Documents/GitHub/JSAdvanced/sass/itemsLayout.scss */
 .itemsLayout {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
   position: relative; }
-  /* line 6, /Users/aerozol/Documents/GitHub/JSAdvanced/sass/itemsLayout.scss */
   .itemsLayout .item {
     display: flex;
     flex-direction: column;
     width: 265px; }
-    /* line 10, /Users/aerozol/Documents/GitHub/JSAdvanced/sass/itemsLayout.scss */
     .itemsLayout .item:hover {
       box-shadow: 0 5px 8px rgba(0, 0, 0, 0.16); }
-      /* line 12, /Users/aerozol/Documents/GitHub/JSAdvanced/sass/itemsLayout.scss */
       .itemsLayout .item:hover .fade {
         display: flex;
         justify-content: center;
         align-items: center; }
-    /* line 18, /Users/aerozol/Documents/GitHub/JSAdvanced/sass/itemsLayout.scss */
     .itemsLayout .item .itemText {
       padding: 20px; }
-      /* line 20, /Users/aerozol/Documents/GitHub/JSAdvanced/sass/itemsLayout.scss */
       .itemsLayout .item .itemText h4 {
         color: #6f6e6e;
         font-size: 14px;
         font-weight: 400;
         text-transform: uppercase;
         margin: 0; }
-      /* line 27, /Users/aerozol/Documents/GitHub/JSAdvanced/sass/itemsLayout.scss */
       .itemsLayout .item .itemText h3 {
         color: #f16d7f;
         font-size: 16px;
         font-weight: 700;
         text-transform: uppercase;
         margin-bottom: 0; }
-    /* line 35, /Users/aerozol/Documents/GitHub/JSAdvanced/sass/itemsLayout.scss */
     .itemsLayout .item .fade {
       display: none;
       height: calc(100% - 92px);
       width: inherit;
       background: rgba(0, 0, 0, 0.5);
       position: absolute; }
-      /* line 41, /Users/aerozol/Documents/GitHub/JSAdvanced/sass/itemsLayout.scss */
       .itemsLayout .item .fade button {
         padding: 15px;
         border: 1px solid #ffffff;
@@ -82,11 +69,9 @@
         cursor: pointer;
         outline: none; }
 
-/* line 1, /Users/aerozol/Documents/GitHub/JSAdvanced/sass/proceedToCartBtn.scss */
 .proceedToCartBtn {
   text-align: right;
   padding: 15px 0; }
-  /* line 4, /Users/aerozol/Documents/GitHub/JSAdvanced/sass/proceedToCartBtn.scss */
   .proceedToCartBtn button {
     width: 235px;
     height: 50px;
@@ -99,14 +84,23 @@
     outline: none;
     cursor: pointer; }
 
-/* line 4, /Users/aerozol/Documents/GitHub/JSAdvanced/sass/style.scss */
+.cartItem {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px auto; }
+  .cartItem .details {
+    display: flex; }
+    .cartItem .details img {
+      width: 100px;
+      height: 115px; }
+
+.total {
+  text-align: right; }
+
 body {
   font-family: 'Lato', sans-serif;
   margin: 0; }
 
-/* line 5, /Users/aerozol/Documents/GitHub/JSAdvanced/sass/style.scss */
 .container {
   width: 1140px;
   margin: 0 auto; }
-
-/*# sourceMappingURL=../css/style.map */
