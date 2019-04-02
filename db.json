@@ -1,8 +1,0 @@
-{
-    "catalogData": [
-        {"id": 1, "name": "Coat", "price": 500, "link": "http://localhost:3000/images/product1.jpg"},
-        {"id": 2, "name": "Jacket", "price": 300, "link": "http://localhost:3000/images/product2.jpg"},
-        {"id": 3, "name": "Coat", "price": 200, "link": "http://localhost:3000/images/product3.jpg"},
-        {"id": 4, "name": "T-Shirt", "price": 150, "link": "http://localhost:3000/images/product4.jpg"}
-    ]
-}
