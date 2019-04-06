@@ -6,25 +6,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/style.css">
-    <script src="script.js"></script>
     <title>ShopCart</title>
 </head>
 
 <body>
-    <div class="container">
-        <ul class="mainNav">
-            <li><a href="#">HOME</a></li>
-            <li><a href="#">MEN</a></li>
-            <li><a href="#">WOMEN</a></li>
-            <li><a href="#">KIDS</a></li>
-            <li><a href="#">ACCESSORIESE</a></li>
-            <li><a href="#">FEATURED</a></li>
-            <li><a href="#">HOT DEALS</a></li>
-        </ul>
-        <div class="itemsLayout"></div>
-        <div class="proceedToCartBtn"></div>
-        <div class="shopCart"></div>
-    </div>
+    <main id="app">
+        <div class="container">
+            <input type="text" v-model="search">
+            <ul class="mainNav">
+                <li v-for="menuItem in mainNav">
+                    <a href="#">{{ menuItem }}</a>
+                </li>
+            </ul>
+            <div class="itemsLayout">
+                <div class="item" v-for="product in filteredCatalogData">
+                    <img :src="product.link">
+                    <div class="itemText">
+                        <h4>{{ product.name }}</h4>
+                        <h3>${{ product.price }}.00</h3>
+                    </div>
+                    <div class="fade">
+                        <button @click="addToCart" :id="product.id">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+            <div class="proceedToCartBtn"></div>
+            <div class="cartLayout" v-if="cart.length !== 0">
+                <div class="cartItem" v-for="cartItem in cart">
+                    <div class="details">
+                        <img :src="cartItem.link">
+                        <article>
+                            <h4></h4>
+                            <p>
+                                Color: {{cartItem.color}}<br>
+                                Size: {{cartItem.Size}}
+                            </p>
+                        </article>
+                    </div>
+                    <div>${{ cartItem.price }}.00</div>
+                    <div>{{ cartItem.quantity }} pcs.</div>
+                    <div>{{ cartItem.shipping }}</div>
+                    <div>${{ cartItem.subtotal }}.00</div>
+                    <div></div>
+                </div>
+                <div class="total">Total: ${{ getTotal() }}.00</div>
+            </div>
+            <div class="cartLayoutEmpty" v-if="cart.length === 0">
+                Корзина пуста
+            </div>
+        </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
