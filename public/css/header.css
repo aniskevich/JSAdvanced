@@ -7020,46 +7020,99 @@ a.text-dark:hover, a.text-dark:focus {
     color: inherit;
     border-color: #dee2e6; } }
 
-.itemsLayout {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  position: relative;
-  padding-top: 50px; }
-  .itemsLayout .product {
-    margin-bottom: 35px;
-    border: none; }
-    .itemsLayout .product:hover {
-      box-shadow: 0 5px 8px rgba(0, 0, 0, 0.16); }
-      .itemsLayout .product:hover .buyFade {
-        display: flex;
-        justify-content: center;
-        align-items: center; }
-    .itemsLayout .product h4 {
-      color: #6f6e6e;
-      font-size: 13px;
-      font-weight: 400;
-      text-transform: uppercase; }
-    .itemsLayout .product h3 {
-      color: #f16d7f;
-      font-size: 16px;
-      font-weight: 700;
-      text-transform: uppercase; }
-    .itemsLayout .product .buyFade {
-      height: calc(100% - 80px);
-      width: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      display: none;
-      position: absolute; }
-      .itemsLayout .product .buyFade button {
-        padding: 15px;
-        border: 1px solid #ffffff;
+header {
+  height: 100px;
+  border-bottom: 1px solid #ececec; }
+  @media (max-width: 991.98px) {
+    header {
+      height: auto;
+      padding: 20px 0; } }
+  header .headerInside {
+    height: inherit;
+    align-items: center;
+    justify-content: space-between; }
+    @media (max-width: 767.98px) {
+      header .headerInside {
+        justify-content: center; }
+        header .headerInside :not(:last-child) {
+          margin-bottom: 20px; } }
+    @media (max-width: 767.98px) {
+      header .headerInside {
+        flex-direction: column; } }
+    header .headerInside .logo {
+      width: 165px;
+      line-height: 51px;
+      background: url(../images/logo.png) no-repeat;
+      font-size: 27px;
+      font-weight: 300;
+      padding-left: 60px; }
+      header .headerInside .logo span {
+        color: #f16d7f;
+        font-weight: 400; }
+    header .headerInside .search {
+      display: flex;
+      height: 38px;
+      border-radius: 3px;
+      overflow: hidden;
+      width: 400px; }
+      @media (max-width: 767.98px) {
+        header .headerInside .search {
+          width: auto; } }
+      header .headerInside .search .searchBrowse {
+        height: inherit;
+        padding: 10px;
+        font-size: 14px;
+        line-height: 14px;
+        color: #222222;
+        background-color: #f9f9f9;
+        box-sizing: border-box;
+        border: 1px solid #e6e6e6;
+        letter-spacing: 0.35px; }
+      header .headerInside .search input {
+        height: inherit;
+        flex-grow: 1;
+        padding: 0 3px;
+        border: none;
+        border-top: 1px solid #e6e6e6;
+        border-bottom: 1px solid #e6e6e6;
+        outline: none;
+        color: #a4a4a4;
+        font-size: 14px;
+        font-weight: 300;
+        line-height: 32px;
+        letter-spacing: 0.35px; }
+        @media (max-width: 1199.98px) {
+          header .headerInside .search input {
+            max-width: 250px; } }
+        @media (max-width: 991.98px) {
+          header .headerInside .search input {
+            max-width: 220px; } }
+      header .headerInside .search button {
+        height: inherit;
+        padding: 0 8px;
+        border: 0;
         background: none;
+        outline: none;
+        border: 1px solid #e6e6e6; }
+    header .headerInside .account {
+      display: flex;
+      justify-content: space-evenly; }
+      @media (max-width: 991.98px) {
+        header .headerInside .account {
+          max-width: 340px; } }
+      header .headerInside .account img {
+        max-width: 32px;
+        height: 29px;
+        margin-top: 6px; }
+      header .headerInside .account .myAcc {
+        height: 38px;
+        width: 130px;
+        background-color: #f16d7f;
         color: white;
-        font-size: 13px;
-        font-weight: 700;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        outline: none; }
+        border: none;
+        outline: none;
+        font-size: 15px;
+        font-weight: 400;
+        line-height: 32px;
+        letter-spacing: 0.38px;
+        margin-left: 20px; }

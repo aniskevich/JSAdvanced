@@ -7020,46 +7020,29 @@ a.text-dark:hover, a.text-dark:focus {
     color: inherit;
     border-color: #dee2e6; } }
 
-.itemsLayout {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  position: relative;
-  padding-top: 50px; }
-  .itemsLayout .product {
-    margin-bottom: 35px;
-    border: none; }
-    .itemsLayout .product:hover {
-      box-shadow: 0 5px 8px rgba(0, 0, 0, 0.16); }
-      .itemsLayout .product:hover .buyFade {
-        display: flex;
-        justify-content: center;
-        align-items: center; }
-    .itemsLayout .product h4 {
-      color: #6f6e6e;
-      font-size: 13px;
-      font-weight: 400;
-      text-transform: uppercase; }
-    .itemsLayout .product h3 {
-      color: #f16d7f;
-      font-size: 16px;
+.advantage {
+  background-color: #222224; }
+  .advantage .row {
+    justify-content: space-around; }
+  .advantage div[class^="col"] {
+    width: 310px;
+    text-align: center; }
+    .advantage div[class^="col"] img {
+      margin: 90px 0 32px 0; }
+    .advantage div[class^="col"] h3 {
+      color: #fbfbfb;
+      font-size: 20px;
       font-weight: 700;
-      text-transform: uppercase; }
-    .itemsLayout .product .buyFade {
-      height: calc(100% - 80px);
-      width: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      display: none;
-      position: absolute; }
-      .itemsLayout .product .buyFade button {
-        padding: 15px;
-        border: 1px solid #ffffff;
-        background: none;
-        color: white;
-        font-size: 13px;
-        font-weight: 700;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        outline: none; }
+      letter-spacing: 0.5px; }
+    .advantage div[class^="col"] p {
+      color: #fbfbfb;
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 23.95px;
+      letter-spacing: 0.35px;
+      margin-bottom: 115px; }
+  @media (max-width: 767.98px) {
+    .advantage div[class^="col"] img {
+      margin: 45px 0 32px 0; }
+    .advantage div[class^="col"] p {
+      margin-bottom: 15px; } }

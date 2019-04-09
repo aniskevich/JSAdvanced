@@ -1,6 +1,0 @@
-[
-    {"name": "Coat", "price": 500, "link": "images/product1.jpg", "color": "red", "size": "L", "quantity": 3, "subtotal": 0},
-    {"name": "Jacket", "price": 300, "link": "images/product2.jpg", "color": "red", "size": "L", "quantity": 2, "subtotal": 0},
-    {"name": "Coat", "price": 200, "link": "images/product3.jpg", "color": "red", "size": "L", "quantity": 1, "subtotal": 0},
-    {"name": "T-Shirt", "price": 150, "link": "images/product4.jpg", "color": "red", "size": "L", "quantity": 2, "subtotal": 0}
-]

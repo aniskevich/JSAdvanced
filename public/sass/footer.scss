@@ -1,0 +1,101 @@
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+footer {
+    padding: 60px 0 45px 0;
+    .information {
+        .logo {
+            width: 165px;
+            line-height: 51px;
+            background: url(../images/logo.png) no-repeat;
+            font-size: 27px;
+            font-weight: 300;
+            padding-left: 65px;
+            span {
+                color: #f16d7f;
+                font-weight: 400;
+            }
+        }
+        p {
+           color: #898989;
+           font-size: 14px;
+           font-weight: 300;
+           line-height: 24px;
+           letter-spacing: 0.35px;
+           padding-top: 40px;
+        }
+    }
+    .links {
+        h4 {
+           color: #f16d7f;
+           font-size: 18px;
+           font-weight: 700;
+           line-height: 26px;
+           text-transform: uppercase;
+           letter-spacing: 0.45px;
+           margin-bottom: 35px;
+        }
+        ul {
+           list-style-type: none;
+           padding: 0;
+           a {
+               color: #898989;
+               font-size: 16px;
+               font-weight: 400;
+               letter-spacing: 0.4px;
+               line-height: 42px;
+               outline: none;
+               text-decoration: none;
+               &:hover {
+                   color: #f16d7f;
+                   text-decoration: none;
+               }
+           }
+       }
+   }
+    @include media-breakpoint-down(lg) {
+        .information {
+            .logo {
+                margin: 0 auto;
+            }
+            p {
+                padding: 0;
+                max-width: 700px;
+                margin: 15px auto;
+                text-align: justify;
+            }
+        }
+        & :nth-child(n+2) {
+            margin-top: 10px;
+        }
+        .links {
+            display: flex;
+            text-align: center;
+            flex-direction: column;
+            padding: 10px 0;
+            &:not(:last-child) {
+                border-right: 1px solid #e6e6e6;
+            }
+            h4 {
+                margin: 0;
+            }
+            ul {
+                display: flex;
+                justify-content: space-around;
+                flex-wrap: wrap;
+                li {
+                    margin: 0;
+                    padding: 0 30px;
+                }
+            }
+        }
+    }
+    @include media-breakpoint-down(sm) {
+            .links {
+                &:not(:last-child) {
+                    border: none;
+                }
+                ul li {
+                        min-width: 150px;
+                }
+            }
+    }
+}
