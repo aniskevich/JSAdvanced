@@ -103,3 +103,64 @@ app.delete('/cart/:id', (req, res) => {
         });
     })
 });
+
+/*
+app.get('/users', (req, res) => {
+    fs.readFile('./public/db/users.json', 'utf-8', (err, data) => {
+        if (err) {
+            res.send('Нет такого файла');
+        }
+        const users = JSON.parse(data);
+        res.send({
+            userIdCounter: users.length,
+        });
+    });
+}); 
+*/
+
+app.post('/auth', (req, res) => {
+    fs.readFile('./public/db/users.json', 'utf-8', (err, data) => {
+        if (err) {
+            res.send('Нет такого файла');
+        }
+        const users = JSON.parse(data);
+        const user = users.find(usr => (usr.login === req.body.login) && (usr.password === req.body.password));
+        if(user) {
+            res.send({
+                auth: 'OK',
+                id: user.id,
+            });
+        }
+        else {
+            res.send({
+                auth: 'error',
+            });
+        }
+    });
+});
+
+app.post('/users', (req, res) => {
+    fs.readFile('./public/db/users.json', 'utf-8', (err, data) => {
+        if (err) {
+            res.send('Нет такого файла');
+        }
+        const users = JSON.parse(data);
+        const user = users.find(usr => (usr.login === req.body.login) && (usr.password === req.body.password));
+        if(user) {
+            res.send({
+                auth: 'error',
+            });
+        }
+        else {
+            let user = req.body;
+            user.id = users.length + 1;
+            users.push(user);
+            fs.writeFile('./public/db/users.json', JSON.stringify(users), () => {
+                res.send({
+                    auth: 'OK',
+                    id: user.id,
+                });
+            });
+        } 
+    });
+});

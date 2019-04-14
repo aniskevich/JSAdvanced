@@ -24,6 +24,104 @@ Vue.component('search-field', {
     }
 });
 
+Vue.component('account', {
+    template:`
+    <div class="account col-lg-3 offset-lg-2 col-md-3">
+        <img class="" src="images/cart.png" alt="cart">
+        <button class="myAcc">
+            My Account
+            <i class="fas fa-caret-down" v-if="!app.isLogin"></i>
+            <div>
+                <ul v-if="!app.isLogin">
+                    <li @click="$('#loginModal').modal('show')">
+                        Log In
+                        <modalLogin @handleLogin="handleLogin" :user="{}"></modalLogin>
+                    </li>
+                    <li @click="$('#registerModal').modal('show')">
+                        Register
+                        <modalRegister @handleRegister="handleRegister" :user="{}"></modalRegister>
+                    </li>
+                </ul>
+            </div> 
+        </button>
+    </div>
+    `,
+    methods: {
+        handleLogin(user) {
+            this.$emit('handlelogin', user);
+        },
+        handleRegister(user) {
+            this.$emit('handleregister', user);
+        }
+    }
+});
+
+Vue.component('modalLogin', {
+    props: ['user'],
+    template:`
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <h4>EMAIL ADDRESS<span> *</span></h4>
+            <input type="email" v-model="user.login">
+            <h4>PASSWORD<span> *</span></h4>
+            <input type="password" v-model="user.password">
+            <p>* Required Fields</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" @click="handleLogin(user)" @click="$('#loginModal').modal('hide')">Log In</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    `,
+    methods: {
+        handleLogin(user) {
+           this.$emit('handleLogin', user);
+           this.user = [];
+        }
+    }
+});
+
+Vue.component('modalRegister', {
+    props: ['user'],
+    template:`
+    <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <h4>EMAIL ADDRESS<span> *</span></h4>
+            <input type="email" v-model="user.login">
+            <h4>PASSWORD<span> *</span></h4>
+            <input type="password" v-model="user.password">
+            <p>* Required Fields</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" @click="handleRegister(user)" @click="$('#registerModal').modal('hide')">Register</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    `,
+    methods: {
+        handleRegister(user) {
+           this.$emit('handleRegister', user);
+           this.user = [];
+        }
+    }
+});
+
 Vue.component('items-list', {
     props: ['query'],
     data() {
@@ -152,6 +250,8 @@ const app = new Vue({
         search: '',
         response: '',
         total: 0,
+        isLogin: false,
+        activeUserId: 0,
     },
     mounted() {
         fetch(`${API_URL}/cart`)
@@ -217,6 +317,40 @@ const app = new Vue({
                         this.total = result.total;
                     });
             }
-        }
+        },
+        handleLogin(user) {
+            fetch(`${API_URL}/auth`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ...user }),
+            })
+                .then((response) => response.json())
+                .then((result) => {
+                    if(result.auth === 'OK') {
+                        this.isLogin = true;
+                        this.activeUserId = result.id;
+                    }
+                    else {
+                        console.log('error');
+                    }
+                });
+        },
+       handleRegister(user) {
+            fetch(`${API_URL}/users`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ...user }),
+            })
+                .then((response) => response.json())
+                .then((result) => {
+                    if(result.auth === 'OK') {
+                        this.isLogin = true;
+                        this.activeUserId = result.id;
+                    }
+                    else {
+                        console.log('error');
+                    }
+            });
+        }, 
     }
 });

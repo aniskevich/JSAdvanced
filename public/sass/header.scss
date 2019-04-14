@@ -104,7 +104,18 @@ header {
                 line-height: 32px;
                 letter-spacing: 0.38px;
                 margin-left: 20px;
+                div {
+                    ul {
+                        padding: 0;
+                        margin: 0;
+                        li {
+                            background-color: #f16d7f;
+                            border: 1px solid #fff;
+                        }
+                    } 
+                    
                 }
+            }
             }
         }
 }

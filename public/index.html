@@ -20,13 +20,7 @@
                         BRAN<span>D</span>
                     </div>
                     <search-field @searchclick="handleSearch"></search-field>
-                    <div class="account col-lg-3 offset-lg-2 col-md-3">
-                        <img class="" src="images/cart.png" alt="cart">
-                        <button class="myAcc">
-                            My Account
-                            <i class="fas fa-caret-down"></i>
-                        </button>
-                    </div>
+                    <account @handlelogin="handleLogin" @handleregister="handleRegister"></account>
                 </div>
             </header>
         </div>
