@@ -93,15 +93,12 @@ app.delete('/cart/:id', (req, res) => {
             res.send('Нет такого файла');
         }
         let cart = JSON.parse(data);
-        let tmpcart = [];
-        cart.map((product) => {
-            if (+product.id !== +req.params.id) {
-                tmpcart.push(product);
-            }
+        cart = cart.filter(cartItem => {
+            return +cartItem.id !== +req.params.id;
         });
-        fs.writeFile('./public/db/cart.json', JSON.stringify(tmpcart), () => {
+        fs.writeFile('./public/db/cart.json', JSON.stringify(cart), () => {
             res.send({
-                total: tmpcart.reduce((acc, product) => acc + product.subtotal, 0)
+                total: cart.reduce((acc, product) => acc + product.subtotal, 0)
             });
         });
     })
