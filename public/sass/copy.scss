@@ -1,0 +1,32 @@
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+.copy {
+    background-color: #e6e6e6;
+    padding: 25px 0;
+    .row {
+        justify-content: space-between;
+        & :first-child {
+            text-align: left;
+        }
+        & :last-child {
+            text-align: right;  
+        }
+        a {
+            filter: contrast(0);
+            &:hover {
+                filter: contrast(1);
+            }
+        }
+        @include media-breakpoint-down(sm) {
+            flex-direction: column;
+            & :nth-child(n) {
+                text-align: center;
+            }
+            & :last-child {
+                margin-top: 15px;
+            }
+            a:not(:last-child) {
+                margin-right: 5px;
+            }
+        }   
+    }
+ }

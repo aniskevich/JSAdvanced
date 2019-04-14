@@ -1,0 +1,44 @@
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+.advantage {
+    background-color: #222224;
+   
+    .row {
+        justify-content: space-around;
+    }
+
+   div[class^="col"] {
+        width: 310px;
+        text-align: center;
+
+        img {
+            margin: 90px 0 32px 0;
+        }
+
+        h3 {
+            color: #fbfbfb;
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        p {
+            color: #fbfbfb;
+            font-size: 14px;
+            font-weight: 300;
+            line-height: 23.95px;
+            letter-spacing: 0.35px;
+            margin-bottom: 115px;
+        }
+    }
+    @include media-breakpoint-down(sm) {
+        div[class^="col"] { 
+            img {
+                margin: 45px 0 32px 0;
+            }
+            p {
+                margin-bottom: 15px;
+            }
+        }
+    }
+    
+ }

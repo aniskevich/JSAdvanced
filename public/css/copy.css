@@ -7020,46 +7020,25 @@ a.text-dark:hover, a.text-dark:focus {
     color: inherit;
     border-color: #dee2e6; } }
 
-.itemsLayout {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  position: relative;
-  padding-top: 50px; }
-  .itemsLayout .product {
-    margin-bottom: 35px;
-    border: none; }
-    .itemsLayout .product:hover {
-      box-shadow: 0 5px 8px rgba(0, 0, 0, 0.16); }
-      .itemsLayout .product:hover .buyFade {
-        display: flex;
-        justify-content: center;
-        align-items: center; }
-    .itemsLayout .product h4 {
-      color: #6f6e6e;
-      font-size: 13px;
-      font-weight: 400;
-      text-transform: uppercase; }
-    .itemsLayout .product h3 {
-      color: #f16d7f;
-      font-size: 16px;
-      font-weight: 700;
-      text-transform: uppercase; }
-    .itemsLayout .product .buyFade {
-      height: calc(100% - 80px);
-      width: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      display: none;
-      position: absolute; }
-      .itemsLayout .product .buyFade button {
-        padding: 15px;
-        border: 1px solid #ffffff;
-        background: none;
-        color: white;
-        font-size: 13px;
-        font-weight: 700;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        outline: none; }
+.copy {
+  background-color: #e6e6e6;
+  padding: 25px 0; }
+  .copy .row {
+    justify-content: space-between; }
+    .copy .row :first-child {
+      text-align: left; }
+    .copy .row :last-child {
+      text-align: right; }
+    .copy .row a {
+      filter: contrast(0); }
+      .copy .row a:hover {
+        filter: contrast(1); }
+    @media (max-width: 767.98px) {
+      .copy .row {
+        flex-direction: column; }
+        .copy .row :nth-child(n) {
+          text-align: center; }
+        .copy .row :last-child {
+          margin-top: 15px; }
+        .copy .row a:not(:last-child) {
+          margin-right: 5px; } }

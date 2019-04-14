@@ -1,25 +1,19 @@
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
 .mainNav {
-    display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
     height: 42px;
-    list-style-type: none;
-    padding: 0;
-    li {
-        flex: 1 1 auto;
-        text-align: center;
-        padding: 10px;
-        a {
-            color: #222222;
-            font-size: 14px;
-            font-weight: 700;
-            line-height: 26px;
-            text-transform: uppercase;
-            text-decoration-line: none;
-            display: block;
-            &:hover {
-                border-bottom: 2px solid #f16d7f;
-                border-radius: 0;
-            }
+    li a {
+        color: #222222;
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 26px;
+        text-transform: uppercase;
+        &:hover {
+            border-bottom: 2px solid #f16d7f;
+            border-radius: 0;
         }
-    }  
+    }
+    @include media-breakpoint-down(lg) {
+        height: auto;
+    }
 }
