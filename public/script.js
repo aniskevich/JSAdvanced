@@ -25,25 +25,23 @@ Vue.component('search-field', {
 });
 
 Vue.component('account', {
-    template:`
+    template: `
     <div class="account col-lg-3 offset-lg-2 col-md-3">
-        <img class="" src="images/cart.png" alt="cart">
-        <button class="myAcc">
+        <a href="http://localhost:3000/shoppingcart.html"><img class="" src="images/cart.png" alt="cart"></a>
+        
+        <button id="myAcc" type="button" class="myAcc btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             My Account
-            <i class="fas fa-caret-down" v-if="!app.isLogin"></i>
-            <div>
-                <ul v-if="!app.isLogin">
-                    <li @click="$('#loginModal').modal('show')">
-                        Log In
-                        <modalLogin @handleLogin="handleLogin" :user="{}"></modalLogin>
-                    </li>
-                    <li @click="$('#registerModal').modal('show')">
-                        Register
-                        <modalRegister @handleRegister="handleRegister" :user="{}"></modalRegister>
-                    </li>
-                </ul>
-            </div> 
         </button>
+            <div class="dropdown-menu" aria-labelledby="myAcc" v-if="!app.isLogin">
+                <a class="dropdown-item" @click="$('#loginModal').modal('show')">Log In</a>
+                <a class="dropdown-item" @click="$('#registerModal').modal('show')">Register</a>
+            </div>
+            <div class="dropdown-menu" aria-labelledby="myAcc" v-if="app.isLogin">
+                <a class="dropdown-item" href="#">Cabinet</a>
+                <a class="dropdown-item" @click="handleLogout">Log Out</a>
+            </div>
+            <modalLogin @handleLogin="handleLogin" :user="{}"></modalLogin>
+            <modalRegister @handleRegister="handleRegister" :user="{}"></modalRegister>
     </div>
     `,
     methods: {
@@ -52,13 +50,16 @@ Vue.component('account', {
         },
         handleRegister(user) {
             this.$emit('handleregister', user);
+        },
+        handleLogout() {
+            this.$emit('handlelogout');
         }
     }
 });
 
 Vue.component('modalLogin', {
     props: ['user'],
-    template:`
+    template: `
     <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -83,15 +84,15 @@ Vue.component('modalLogin', {
     `,
     methods: {
         handleLogin(user) {
-           this.$emit('handleLogin', user);
-           this.user = [];
+            this.$emit('handleLogin', user);
+            this.user = [];
         }
     }
 });
 
 Vue.component('modalRegister', {
     props: ['user'],
-    template:`
+    template: `
     <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -116,8 +117,8 @@ Vue.component('modalRegister', {
     `,
     methods: {
         handleRegister(user) {
-           this.$emit('handleRegister', user);
-           this.user = [];
+            this.$emit('handleRegister', user);
+            this.user = [];
         }
     }
 });
@@ -159,7 +160,7 @@ Vue.component('items-list', {
 Vue.component('product', {
     props: ['product'],
     template: `
-    <div class="col-md-3">
+    <div>
         <div class="card product">
             <img :src="product.link" class="card-img-top">
             <div class="card-body">
@@ -195,7 +196,7 @@ Vue.component('cart-list', {
             <cart-product @deleteClick="deleteFromCart" v-for="product in cart" :product="product"></cart-product>
             <div class="total" v-if="cart.length !== 0">Total: $ {{ total }}.00</div>
             <div class="cartLayoutEmpty" v-if="cart.length === 0">
-                Корзина пуста
+                CART IS EMPTY
             </div>
         </div>
     </div>
@@ -225,7 +226,7 @@ Vue.component('cart-product', {
         <div class="col-md-2">{{ product.quantity }} pcs.</div>
         <div class="col-md-1">{{ product.shipping }}</div>
         <div class="col-md-2">$ {{ product.subtotal }}.00</div>
-        <div class="col-md-1"><button @click="deleteFromCart(product)">X</button></div>
+        <div class="col-md-1"><i class="fas fa-times-circle" @click="deleteFromCart(product)"></i></div>
     </div>
     `,
     methods: {
@@ -242,11 +243,158 @@ Vue.component('error', {
     `
 });
 
+Vue.component('copy', {
+    template: `
+    <div class="copy">
+        <div class="container">
+            <div class="row">
+                <div>
+                    &copy; 2019 Brand All Rights Reserved.
+                </div>
+                <div>
+                    <a href="#"><img src="images/facebook.png" alt="facebook"></a>
+                    <a href="#"><img src="images/twitter.png" alt="twitter"></a>
+                    <a href="#"><img src="images/linkedin.png" alt="linkedin"></a>
+                    <a href="#"><img src="images/pinterest.png" alt="pinterest"></a>
+                    <a href="#"><img src="images/googleplus.png" alt="google"></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    `
+});
+
+Vue.component('foot', {
+    template: `
+    <footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-5 col-md-12 information">
+                <div class="logo">
+                    BRAN<span>D</span>
+                </div>
+                <p>
+                    Objectively transition extensive data rather than cross functional solutions.
+                    Monotonectally
+                    syndicate multidisciplinary materials before go forward benefits. Intrinsicly syndicate an
+                    expanded array of processes and cross-unit partnerships.
+                </p>
+                <p>
+                    Efficiently plagiarize 24/365 action items and focused infomediaries.
+                    Distinctively seize superior initiatives for wireless technologies. Dynamically optimize.
+                </p>
+            </div>
+            <div class="col-xl-2 offset-xl-1 col-md-4 links">
+                <h4>COMPANY</h4>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Shop</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">How It Works</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="col-xl-2 col-md-4 links">
+                <h4>INFORMATION</h4>
+                <ul>
+                    <li><a href="#">Terms & Condition</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">How to Buy</a></li>
+                    <li><a href="#">How to Sell</a></li>
+                    <li><a href="#">Promotion</a></li>
+                </ul>
+            </div>
+            <div class="col-xl-2 col-md-4 links">
+                <h4>SHOP CATEGORY</h4>
+                <ul>
+                    <li><a href="#">Men</a></li>
+                    <li><a href="#">Women</a></li>
+                    <li><a href="#">Child</a></li>
+                    <li><a href="#">Apparel</a></li>
+                    <li><a href="#">Browse All</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </footer>
+    `
+});
+
+Vue.component('foot-banner', {
+    data() {
+        return {
+            reviews: [],
+        };
+    },
+    template: `
+   <div class="footBanner">
+   <div class="container">
+    <div class="row">
+        <div class="col-lg-5">
+        <div id="carouselReviews" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselReviews" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselReviews" data-slide-to="1"></li>
+            <li data-target="#carouselReviews" data-slide-to="2"></li>
+        </ol>
+    <div class="carousel-inner">
+        <div class="carousel-item" v-for="(review, index) in reviews" :class="{ 'active': index === 0 }">
+            <div class="media">
+                <img :src="review.user_avatar" class="align-self-center mr-3" alt="...">
+                <div class="media-body">
+                    <blockquote>
+                        {{ review.text }}
+                    </blockquote>
+                    <h3>{{ review.user_name }}</h3>
+                </div>
+            </div>
+        </div>
+    </div> 
+</div>
+</div>
+<div class="divider"></div>
+        <div class="col-lg-5">
+            <div class="label">
+                <h3>SUBSCRIBE</h3>
+                <h4>FOR OUR NEWLETTER AND PROMOTION</h4>
+            </div>
+            <form>
+                <div class="form-group">
+                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+    </div>
+    </div>
+   `,
+    mounted() {
+        fetch(`${API_URL}/reviews`)
+            .then((response) => {
+                this.response = response.status;
+                return response.json();
+            })
+            .then((result) => {
+                this.reviews = result.reviews;
+            });
+    },
+});
+
 const app = new Vue({
     el: '#app',
     data: {
-        mainNav: ['home', 'men', 'women', 'kids', 'accessoriese', 'featured', 'hot deals'],
+        mainNav: [
+            { name: 'home', link: "http://localhost:3000/index.html" },
+            { name: 'men', link: "http://localhost:3000/product.html" },
+            { name: 'women', link: "http://localhost:3000/product.html" },
+            { name: 'kids', link: "http://localhost:3000/product.html" },
+            { name: 'accessoriese', link: "http://localhost:3000/product.html" },
+            { name: 'featured', link: "#" },
+            { name: 'hot deals', link: "#" },
+        ],
         cart: [],
+        reviews: [],
         search: '',
         response: '',
         total: 0,
@@ -254,14 +402,23 @@ const app = new Vue({
         activeUserId: 0,
     },
     mounted() {
-        fetch(`${API_URL}/cart`)
+        fetch(`${API_URL}/preferences`)
             .then((response) => {
                 this.response = response.status;
                 return response.json();
             })
             .then((result) => {
-                this.cart = result.products;
-                this.total = result.total;
+                this.isLogin = result.isLogin;
+                this.activeUserId = result.user_id;
+                fetch(`${API_URL}/cart/${this.activeUserId}`)
+                    .then((response) => {
+                        this.response = response.status;
+                        return response.json();
+                    })
+                    .then((result) => {
+                        this.cart = result.products;
+                        this.total = result.total;
+                    });
             });
     },
     methods: {
@@ -271,10 +428,10 @@ const app = new Vue({
         addToCart(product) {
             const cartItem = this.cart.find(cartItem => cartItem.id === product.id);
             if (cartItem) {
-                fetch(`${API_URL}/cart/${product.id}`, {
+                fetch(`${API_URL}/cart/${this.activeUserId}`, {
                     method: 'PATCH',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ quantity: ++cartItem.quantity, subtotal: cartItem.price * cartItem.quantity })
+                    body: JSON.stringify({ product_id: product.id, quantity: ++cartItem.quantity, subtotal: cartItem.price * cartItem.quantity })
                 })
                     .then((response) => response.json())
                     .then((result) => {
@@ -284,10 +441,10 @@ const app = new Vue({
                     });
             }
             else {
-                fetch(`${API_URL}/cart`, {
+                fetch(`${API_URL}/cart/${this.activeUserId}`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ ...product, quantity: 1, subtotal: product.price }),
+                    body: JSON.stringify({ ...product, quantity: 1, subtotal: product.price, }),
                 })
                     .then((response) => response.json())
                     .then((result) => {
@@ -298,10 +455,10 @@ const app = new Vue({
         },
         deleteFromCart(product) {
             if (product.quantity > 1) {
-                fetch(`${API_URL}/cart/${product.id}`, {
+                fetch(`${API_URL}/cart/${this.activeUserId}`, {
                     method: 'PATCH',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ quantity: --product.quantity, subtotal: product.price * product.quantity })
+                    body: JSON.stringify({ product_id: product.id, quantity: --product.quantity, subtotal: product.price * product.quantity })
                 }).then((response) => response.json())
                     .then((result) => {
                         const itemIdx = this.cart.findIndex(cartItem => cartItem.id === product.id);
@@ -309,7 +466,7 @@ const app = new Vue({
                         this.total = result.total;
                     });
             } else {
-                fetch(`${API_URL}/cart/${product.id}`, {
+                fetch(`${API_URL}/cart/${this.activeUserId}/${product.id}`, {
                     method: 'DELETE',
                 }).then((response) => response.json())
                     .then((result) => {
@@ -326,7 +483,32 @@ const app = new Vue({
             })
                 .then((response) => response.json())
                 .then((result) => {
-                    if(result.auth === 'OK') {
+                    if (result.auth === 'OK') {
+                        this.activeUserId = result.id;
+                        fetch(`${API_URL}/preferences`, {
+                            method: 'PATCH',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ isLogin: true, user_id: this.activeUserId })
+                        }).then((response) => response.json())
+                            .then((result) => {
+                                this.isLogin = result.isLogin;
+                                this.activeUserId = result.user_id;
+                            });
+                    }
+                    else {
+                        console.log('error');
+                    }
+                });
+        },
+        handleRegister(user) {
+            fetch(`${API_URL}/users`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ...user }),
+            })
+                .then((response) => response.json())
+                .then((result) => {
+                    if (result.auth === 'OK') {
                         this.isLogin = true;
                         this.activeUserId = result.id;
                     }
@@ -335,22 +517,17 @@ const app = new Vue({
                     }
                 });
         },
-       handleRegister(user) {
-            fetch(`${API_URL}/users`, {
-                method: 'POST',
+        handleLogout() {
+            fetch(`${API_URL}/preferences`, {
+                method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ ...user }),
+                body: JSON.stringify({ isLogin: false, user_id: 0 })
             })
                 .then((response) => response.json())
                 .then((result) => {
-                    if(result.auth === 'OK') {
-                        this.isLogin = true;
-                        this.activeUserId = result.id;
-                    }
-                    else {
-                        console.log('error');
-                    }
-            });
-        }, 
+                    this.isLogin = result.isLogin;
+                    this.activeUserId = result.user_id;
+                });
+        },
     }
 });

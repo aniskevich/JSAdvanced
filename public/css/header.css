@@ -7113,12 +7113,14 @@ header {
         outline: none;
         font-size: 15px;
         font-weight: 400;
-        line-height: 32px;
         letter-spacing: 0.38px;
         margin-left: 20px; }
-        header .headerInside .account .myAcc div ul {
-          padding: 0;
-          margin: 0; }
-          header .headerInside .account .myAcc div ul li {
-            background-color: #f16d7f;
-            border: 1px solid #fff; }
+      header .headerInside .account .dropdown-menu {
+        background-color: #f16d7f;
+        padding: 0;
+        margin: 0; }
+        header .headerInside .account .dropdown-menu a {
+          border: 1px solid #fff;
+          color: #fff; }
+          header .headerInside .account .dropdown-menu a:hover {
+            color: #f16d7f; }

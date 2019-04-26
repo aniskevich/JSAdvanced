@@ -1,0 +1,187 @@
+.shoppingCart {
+    .shopCartHeading { 
+        border-bottom: 1px solid #eaeaea;
+        div {
+            color: #222222;
+            font-size: 13px;
+            font-weight: 700;
+            line-height: 20px;
+            letter-spacing: -0.2px;
+            padding-top: 15px;
+            text-align: center;
+        }
+    }
+    .shopCartProduct {
+        text-align: center;
+        border-bottom: 1px solid #eaeaea;
+        padding: 25px 0;
+        align-items: center;
+        div:not(.article) {
+            color: #656565;
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 20px;
+        }
+        .article {
+            display: flex;
+            article {
+                padding-left: 21px;
+            }
+            h4 {
+                color: #222222;
+                font-size: 13px;
+                font-weight: 400;
+                text-transform: uppercase;
+                margin-top: 5px;
+            }
+            p {
+                color: #6f6e6e;
+                font-size: 13px;
+                font-weight: 300;
+                line-height: 20px;
+                margin-top: 38px;
+                text-align: left;
+            }
+        }
+        input {
+            width: 54px;
+            height: 30px;
+            border: 1px solid #eaeaea;
+            background-color: #ffffff;
+            text-align: center;
+            color: #656565;
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 20px;
+            outline: none;
+        }
+    }
+}       
+.shopCartButtons {
+    .container {
+        justify-content: space-between;
+        margin: 45px auto 0 auto;
+        @include media-breakpoint-down(xs) {
+            justify-content: center;
+            &>div {
+                margin: 10px 5px;
+            }
+        }
+    }
+    button {
+        width: 235px;
+        height: 50px;
+        border: 1px solid #eaeaea;
+        background-color: #ffffff;
+        color: #4a4a4a;
+        font-size: 14px;
+        font-weight: 700;
+        outline: none;
+    }
+}
+.shipping {
+    justify-content: space-between;
+    align-content: flex-start;
+    padding-top: 50px;
+    padding-bottom: 80px;
+    flex-wrap: wrap;
+    &>div {
+        padding-bottom: 20px;
+    }
+    h4 {
+        margin: 0;
+        color: #222222;
+        font-size: 16px;
+        font-weight: 700;
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+    input {
+        width: 330px;
+        height: 45px;
+        color: #b1b1b1;
+        font-size: 13px;
+        font-weight: 300;
+        margin-top: 20px;
+        border: 1px solid #eaeaea;
+        padding-left: 15px;
+        @include media-breakpoint-down(md) {
+            width: 280px;
+            margin-top: 10px;
+        }
+    }
+    .address button {
+        width: 100px;
+        height: 35px;
+        color: #4a4a4a;
+        font-size: 11px;
+        font-weight: 700;
+        margin-top: 23px;
+        border: 1px solid #eaeaea;
+        background-color: #ffffff;
+    }
+    .coupon {
+        p {
+            color: #000000;
+            font-size: 14px;
+            font-weight: 300;
+            margin: 28px 0 0 0;
+            @include media-breakpoint-down(md) {
+                margin: 15px 0 0 0;
+            }
+        }
+        button {
+            width: 118px;
+            height: 35px;
+            border: 1px solid #eaeaea;
+            background-color: #ffffff;
+            color: #4a4a4a;
+            font-size: 11px;
+            font-weight: 700;
+            margin-top: 23px;
+        }
+    }
+    .total {
+        background-color: #f5f3f3;
+        height: 214px;
+        p {
+            color: #4a4a4a;
+            font-size: 11px;
+            font-weight: 400;
+            margin: 40px 50px 0 0;
+            text-align: right;
+        }
+        h5 {
+            color: #222222;
+            font-size: 16px;
+            font-weight: 700;
+            margin: 14px 50px 22px 0;
+            text-align: right;
+            span {
+                color: #f16d7f;
+            }
+        }
+        img {
+            display: block;
+            margin: 0 auto;
+        }
+        button {
+            width: 273px;
+            height: 50px;
+            background-color: #f16d7f;
+            display: block;
+            margin: 17px auto 0 auto;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 700;
+        }
+        @include media-breakpoint-down(lg) {
+            p, h5 {
+                text-align: center;
+                margin: 25px 0;
+            }
+        }
+    }
+}

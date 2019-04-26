@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+
+    <title>Product</title>
+</head>
+
+<body>
+    <div id="app" v-if="response === 200">
+            <div class="container">
+                    <header>
+                        <div class="headerInside row no-gutters">
+                            <div class="logo col-lg-3 col-md-3">
+                                BRAN<span>D</span>
+                            </div>
+                            <search-field @searchclick="handleSearch"></search-field>
+                            <account @handlelogin="handleLogin" @handleregister="handleRegister" @handlelogout="handleLogout"></account>
+                        </div>
+                    </header>
+                </div>
+                <div class="container">
+                    <ul class="nav nav-pills nav-fill mainNav">
+                        <li v-for="menuItem in mainNav" class="nav-item">
+                            <a :href="menuItem.link" class="nav-link">{{ menuItem.name }}</a>
+                        </li>
+                    </ul>
+                </div>
+        <div class="topBanner">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>NEW ARRIVALS</p>
+                    </div>
+                    <div class="col-md-6">
+                        <nav aria-label="breadcrumb" class="topNav">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">HOME</a></li>
+                                <li class="breadcrumb-item"><a href="#">MEN</a></li>
+                                <li class="breadcrumb-item"><a href="#">NEW ARRIVALS</a></li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container productMain">
+            <div class="row">
+                <div class="col-md-3">
+
+                    <div class="accordion" id="accordionExample">
+                        <div class="card productMenu">
+                            <div class="card-header productMenuHeader" id="headingOne">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+                                        aria-expanded="true" aria-controls="collapseOne">
+                                        CATEGORY
+                                    </button>
+                                </h2>
+                            </div>
+
+                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    <ul>
+                                        <li>Accesoriese</li>
+                                        <li>Bags</li>
+                                        <li>Denim</li>
+                                        <li>Hoodies&Sweatshirts</li>
+                                        <li>Jackets&Coats</li>
+                                        <li>Pants</li>
+                                        <li>Polos</li>
+                                        <li>Shirts</li>
+                                        <li>Shoes</li>
+                                        <li>Shorts</li>
+                                        <li>Sweaters&Coats</li>
+                                        <li>T-Shirts</li>
+                                        <li>Tanks</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card productMenu">
+                            <div class="card-header productMenuHeader" id="headingTwo">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                        data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                        BRAND
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    <ul>
+                                        <li>Accesoriese</li>
+                                        <li>Bags</li>
+                                        <li>Denim</li>
+                                        <li>Hoodies&Sweatshirts</li>
+                                        <li>Jackets&Coats</li>
+                                        <li>Pants</li>
+                                        <li>Polos</li>
+                                        <li>Shirts</li>
+                                        <li>Shoes</li>
+                                        <li>Shorts</li>
+                                        <li>Sweaters&Coats</li>
+                                        <li>T-Shirts</li>
+                                        <li>Tanks</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card productMenu">
+                            <div class="card-header productMenuHeader" id="headingThree">
+                                <h2 class="mb-0">
+                                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
+                                        data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                        DESIGNER
+                                    </button>
+                                </h2>
+                            </div>
+                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                                <div class="card-body">
+                                    <ul>
+                                        <li>Accesoriese</li>
+                                        <li>Bags</li>
+                                        <li>Denim</li>
+                                        <li>Hoodies&Sweatshirts</li>
+                                        <li>Jackets&Coats</li>
+                                        <li>Pants</li>
+                                        <li>Polos</li>
+                                        <li>Shirts</li>
+                                        <li>Shoes</li>
+                                        <li>Shorts</li>
+                                        <li>Sweaters&Coats</li>
+                                        <li>T-Shirts</li>
+                                        <li>Tanks</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-md-4 prod">
+                            <h2>Trending now</h2>
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#">Bohemian</a></li>
+                                    <li class="breadcrumb-item"><a href="#">Floral</a></li>
+                                    <li class="breadcrumb-item"><a href="">Lace</a></li>
+                                    <li class="breadcrumb-item"><a href="">Floral</a></li>
+                                    <li class="breadcrumb-item"><a href="">Lace</a></li>
+                                    <li class="breadcrumb-item"><a href="">Bohemian</a></li>
+                                </ol>
+                            </nav>
+                        </div>
+                        <div class="col-md-4 prod">
+                            <h2>Size</h2>
+                            <input type="radio" name="size" id="xxs">
+                            <label for="xxs">XXS</label>
+                            <input type="radio" name="size" id="xs">
+                            <label for="xs">XS</label>
+                            <input type="radio" name="size" id="s">
+                            <label for="s">S</label>
+                            <input type="radio" name="size" id="m">
+                            <label for="m">M</label>
+                            <input type="radio" name="size" id="l">
+                            <label for="l">L</label>
+                            <input type="radio" name="size" id="xl">
+                            <label for="xl">XL</label>
+                            <input type="radio" name="size" id="xxl">
+                            <label for="xxl">XXL</label>
+                        </div>
+                        <div class="col-md-4 prod">
+                            <h2>Price</h2>
+                        </div>
+
+                        <div class="col-md-12 sort">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <button type="button" class="btn btn-outline-secondary">Sort By</button>
+                                    <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Name
+                                        <span class="sr-only">Toggle Dropdown</span>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">Name</a>
+                                        <a class="dropdown-item" href="#">Size</a>
+                                        <a class="dropdown-item" href="#">Brand</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <button type="button" class="btn btn-outline-secondary">Show</button>
+                                    <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        09
+                                        <span class="sr-only">Toggle Dropdown</span>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">10</a>
+                                        <a class="dropdown-item" href="#">20</a>
+                                        <a class="dropdown-item" href="#">30</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <items-list :query="search" @buyclick="addToCart"></items-list>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="pageNav">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 offset-md-2 col-sm-12">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                <li class="page-item"><a class="page-link" href="#">5</a></li>
+                                <li class="page-item"><a class="page-link" href="#">6</a></li>
+                                <li class="page-item"><a class="page-link" href="#">7</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="col-md-1 col-sm-12">
+                        <button type="button" class="btn btn-primary">View All</button>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="advantage">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="images/logodelivery.png" alt="delivery">
+                        <h3>Free Delivery</h3>
+                        <p>
+                            Worldwide delivery on all. Authorit tively morph next-generation innov tion with extensive
+                            models.
+                        </p>
+                    </div>
+                    <div class="col-md-4">
+                        <img src="images/logodiscount.png" alt="discount">
+                        <h3>Sales & discounts</h3>
+                        <p>
+                            Worldwide delivery on all. Authorit tively morph next-generation innov tion with extensive
+                            models.
+                        </p>
+                    </div>
+                    <div class="col-md-4">
+                        <img src="images/logocrown.png" alt="crown">
+                        <h3>Quality assurance</h3>
+                        <p>
+                            Worldwide delivery on all. Authorit tively morph next-generation innov tion with extensive
+                            models.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <foot-banner></foot-banner>
+        <foot></foot>
+        <copy></copy>
+        <error :response="response"></error>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="script.js"></script>
+
+</body>
+
+</html>
