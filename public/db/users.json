@@ -1,1 +1,1 @@
-[{"login":"1","password":"2","id":1},{"login":"5","password":"7","id":2},{"login":"3","password":"4","id":3}]
+[{"login":"1","password":"2","isAdmin":true,"id":1,"link":"http://localhost:3000/images/user.jpg","bio":"sdsdf","name":"User Name"},{"login":"5","password":"6","id":2,"name":"User Test","email":"sad@b.ru","gender":"F","bio":"Hi", "link":"http://localhost:3000/images/user.jpg"}]

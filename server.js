@@ -147,6 +147,24 @@ app.delete('/cart/:user/:id', (req, res) => {
     })
 });
 
+app.delete('/cart/:user', (req, res) => {
+    fs.readFile('./public/db/cart.json', 'utf-8', (err, data) => {
+        if (err) {
+            res.send('Нет такого файла');
+        }
+        let cart = JSON.parse(data);
+        cart = cart.filter(userCart => {
+            return +userCart.user_id !== +req.params.user;
+        });
+        fs.writeFile('./public/db/cart.json', JSON.stringify(cart), () => {
+            res.send({
+                cart: [],
+                total: 0,
+            });
+        });
+    })
+});
+
 app.post('/auth', (req, res) => {
     fs.readFile('./public/db/users.json', 'utf-8', (err, data) => {
         if (err) {
@@ -155,10 +173,28 @@ app.post('/auth', (req, res) => {
         const users = JSON.parse(data);
         const user = users.find(usr => (usr.login === req.body.login) && (usr.password === req.body.password));
         if (user) {
-            res.send({
-                auth: 'OK',
-                id: user.id,
-            });
+            if (user.isAdmin) {
+                fs.readFile('./public/db/preferences.json', 'utf-8', (err, data) => {
+                    if (err) {
+                        res.send('Нет такого файла');
+                    }
+                    const prefs = [{ isLogin: true, user_id: user.id, isAdmin: true}];
+                    fs.writeFile('./public/db/preferences.json', JSON.stringify(prefs), () => {
+                        res.send({
+                            auth: 'OK',
+                            id: user.id,
+                            isAdmin: true,
+                        });
+                    });
+                });
+            }
+            else {
+                res.send({
+                    auth: 'OK',
+                    id: user.id,
+                    isAdmin: false,
+                });
+            } 
         }
         else {
             res.send({
@@ -177,6 +213,7 @@ app.get('/preferences', (req, res) => {
         res.send({
             isLogin: prefs[0].isLogin,
             user_id: prefs[0].user_id,
+            isAdmin: prefs[0].isAdmin,
         });
     });
 });
@@ -189,11 +226,32 @@ app.patch('/preferences', (req, res) => {
         let prefs = JSON.parse(data);
         prefs[0].isLogin = req.body.isLogin;
         prefs[0].user_id = req.body.user_id;
+        prefs[0].isAdmin = req.body.isAdmin;
         fs.writeFile('./public/db/preferences.json', JSON.stringify(prefs), () => {
             res.send({
                 isLogin: prefs[0].isLogin,
                 user_id: prefs[0].user_id,
+                isAdmin: prefs[0].isAdmin,
             });
+        });
+    });
+});
+
+app.get('/users/:id', (req, res) => {
+    fs.readFile('./public/db/users.json', 'utf-8', (err, data) => {
+        if (err) {
+            res.send('Нет такого файла');
+        }
+        const users = JSON.parse(data);
+        let user = users.find(usr => (+usr.id === +req.params.id));
+        if (user) {
+            delete user.password;
+        }
+        else {
+            user = {name:'', link:'', bio:'', gender:'', email: ''};
+        }
+        res.send({
+            user: user,
         });
     });
 });
@@ -215,12 +273,43 @@ app.post('/users', (req, res) => {
             user.id = users.length + 1;
             users.push(user);
             fs.writeFile('./public/db/users.json', JSON.stringify(users), () => {
-                res.send({
-                    auth: 'OK',
-                    id: user.id,
+                const prefs = [{ isLogin: true, user_id: user.id}];
+                fs.readFile('./public/db/preferences.json', 'utf-8', (err, data) => {
+                    if (err) {
+                        res.send('Нет такого файла');
+                    }
+                    fs.writeFile('./public/db/preferences.json', JSON.stringify(prefs), () => {
+                        res.send({
+                            auth: 'OK',
+                            id: user.id,
+                        });
+                    });
                 });
             });
         }
+    });
+});
+
+app.patch('/users/:id', (req, res) => {
+    fs.readFile('./public/db/users.json', 'utf-8', (err, data) => {
+        if (err) {
+            res.send('Нет такого файла');
+        }
+        let users = JSON.parse(data);
+        const user = users.find(usr => (+usr.id === +req.params.id));
+        for (param in req.body.user) {
+            user[param] = req.body.user[param];
+        }
+        users = users.filter(user => {
+            return +user.id !== +req.params.id;
+        });
+        users.push(user);
+        fs.writeFile('./public/db/users.json', JSON.stringify(users), () => {
+            delete user.password;
+            res.send({
+                user: user,
+            });
+        });
     });
 });
 
@@ -229,9 +318,117 @@ app.get('/reviews', (req, res) => {
         if (err) {
             res.send('Нет такого файла');
         }
-        const reviews = JSON.parse(data);
+        let reviews = JSON.parse(data);
+        reviews = reviews.filter(review => {
+            return review.isApproved;
+        });
+        if (reviews.length > 3) {
+            const tmp = Math.floor(Math.random() * (reviews.length - 2));
+            reviews = reviews.slice(tmp, tmp + 3);
+        }
         res.send({
             reviews: reviews,
         });
+    });
+});
+
+app.get('/reviews/:id', (req, res) => {
+    fs.readFile('./public/db/reviews.json', 'utf-8', (err, data) => {
+        if (err) {
+            res.send('Нет такого файла');
+        }
+        let reviews = JSON.parse(data);
+        const reviewsToApprove = reviews.filter(review => {
+            return review.isApproved === false;
+        });
+        reviews = reviews.filter(review => {
+            return +review.user_id === +req.params.id;
+        });
+        res.send({
+            reviews: reviews,
+            reviewsToApprove: reviewsToApprove,
+        });
+    });
+});
+
+app.post('/reviews', (req, res) => {
+    fs.readFile('./public/db/reviews.json', 'utf-8', (err, data) => {
+        if (err) {
+            res.send('Нет такого файла');
+        }
+        let reviews = JSON.parse(data);
+        if (reviews.length !== 0) {
+            reviews.sort( (a, b) => {
+                if (a.id > b.id) return 1;
+                if (a.id < b.id) return -1;
+            });
+            req.body.id = reviews[reviews.length - 1].id + 1;
+            reviews.push(req.body);
+        }
+        else {
+            req.body.id = 0;
+            reviews.push(req.body);
+        }
+        fs.writeFile('./public/db/reviews.json', JSON.stringify(reviews), () => {
+            reviewsToApprove = reviews.filter(review => {
+                return review.isApproved === false;
+            });
+            reviews = reviews.filter(review => {
+                return +review.user_id === +req.body.user_id;
+            });
+            res.send({
+                reviews: reviews,
+                reviewsToApprove: reviewsToApprove,
+            });
+        });
+    });
+});
+
+app.delete('/reviews/:user/:id', (req, res) => {
+    fs.readFile('./public/db/reviews.json', 'utf-8', (err, data) => {
+        if (err) {
+            res.send('Нет такого файла');
+        }
+        let reviews = JSON.parse(data);
+        reviews = reviews.filter(review => {
+            return +review.id !== +req.params.id;
+        });
+        const reviewsToApprove = reviews.filter(review => {
+            return review.isApproved === false;
+        });
+        fs.writeFile('./public/db/reviews.json', JSON.stringify(reviews), () => {
+            reviews = reviews.filter(review => {
+                return +review.user_id === +req.params.user;
+            });
+            res.send({
+                reviews: reviews,
+                reviewsToApprove: reviewsToApprove,
+            });
+        });
+    });
+});
+
+app.patch('/reviews/:id', (req, res) => {
+    fs.readFile('./public/db/reviews.json', 'utf-8', (err, data) => {
+        if (err) {
+            res.send('Нет такого файла');
+        }
+        let reviews = JSON.parse(data);
+        const review = reviews.find(review => {
+            return +review.id === +req.params.id;
+        });
+        review.isApproved = true;
+        reviews = reviews.filter(review => {
+            return +review.id !== +req.params.id;
+        });
+        reviews.push(review);
+        const reviewsToApprove = reviews.filter(review => {
+            return review.isApproved === false;
+        });
+        fs.writeFile('./public/db/reviews.json', JSON.stringify(reviews), () => {
+             res.send({
+                reviewsToApprove: reviewsToApprove,
+             });
+         });
     });
 });

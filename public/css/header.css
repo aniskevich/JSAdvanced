@@ -7124,3 +7124,12 @@ header {
           color: #fff; }
           header .headerInside .account .dropdown-menu a:hover {
             color: #f16d7f; }
+      header .headerInside .account #registerModal .modal-header h4, header .headerInside .account #loginModal .modal-header h4 {
+        text-transform: uppercase; }
+      header .headerInside .account #registerModal .modal-body form, header .headerInside .account #loginModal .modal-body form {
+        display: flex;
+        flex-direction: column; }
+        header .headerInside .account #registerModal .modal-body form input, header .headerInside .account #loginModal .modal-body form input {
+          padding-left: 5px; }
+        header .headerInside .account #registerModal .modal-body form .btn, header .headerInside .account #loginModal .modal-body form .btn {
+          background-color: #f16d7f; }

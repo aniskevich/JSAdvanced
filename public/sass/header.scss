@@ -86,7 +86,6 @@ header {
             @include media-breakpoint-down(md) {
                 max-width: 340px;
             }
-            
             img {
                 max-width: 32px;
                 height: 29px;
@@ -116,6 +115,25 @@ header {
                     }
                 }  
             }
+            #registerModal, #loginModal {
+                .modal-header {
+                    h4 {
+                        text-transform: uppercase;
+                    }
+                }
+                .modal-body {
+                    form {
+                        display: flex;
+                        flex-direction: column;
+                        input {
+                            padding-left: 5px;
+                        }
+                        .btn {
+                            background-color: #f16d7f;
+                        }
+                    }
+                }
             }
         }
+    }
 }

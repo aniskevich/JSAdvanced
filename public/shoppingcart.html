@@ -53,41 +53,7 @@
             </div>
         </div>
         <main>
-            <cart-list :cart="cart" :total="total" @deleteclick="deleteFromCart"></cart-list>
-            <div class="shopCartButtons">
-                <div class="row container">
-                    <div><button>CLEAR SHOPPING CART</button></div>
-                    <div><a href="http://localhost:3000/product.html"><button>CONTINUE SHOPPING</button></a></div>
-                </div>
-            </div>
-            <div class="container">
-                <div class="row shipping">
-
-                    <div class="col-xl-4 col-md-6 col-sm-12 address">
-                        <h4>SHIPPING ADDRESS</h4>
-                        <form>
-                            <input type="text" placeholder="Bangladesh">
-                            <input type="text" placeholder="State">
-                            <input type="text" placeholder="Postcode/ZIP">
-                            <button>GET A QUOTE</button>
-                        </form>
-                    </div>
-                    <div class="col-xl-4 col-md-6 col-sm-12 coupon">
-                        <h4>COUPON DISCOUNT</h4>
-                        <p>Enter your coupon code if you have one</p>
-                        <form>
-                            <input type="text" placeholder="State">
-                            <button>APPLY COUPON</button>
-                        </form>
-                    </div>
-                    <div class="col-xl-4 col-md-12 col-sm-12 total">
-                        <p>SUB TOTAL $900</p>
-                        <h5>GRAND TOTAL <span>$900</span></h5>
-                        <img src="images/line.png" alt="line">
-                        <a href="http://localhost:3000/checkout.html"><button>PROCEED TO CHECKOUT</button></a>
-                    </div>
-                </div>
-            </div>
+            <cart-list :cart="cart" :total="total" @deleteclick="deleteFromCart" @deletecart="deleteCart"></cart-list>
         </main>
         <foot-banner></foot-banner>
         <foot></foot>

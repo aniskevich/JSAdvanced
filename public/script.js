@@ -27,7 +27,7 @@ Vue.component('search-field', {
 Vue.component('account', {
     template: `
     <div class="account col-lg-3 offset-lg-2 col-md-3">
-        <a href="http://localhost:3000/shoppingcart.html"><img class="" src="images/cart.png" alt="cart"></a>
+        <a href="http://localhost:3000/shoppingcart.html"><img src="images/cart.png" alt="cart"></a>
         
         <button id="myAcc" type="button" class="myAcc btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             My Account
@@ -37,7 +37,7 @@ Vue.component('account', {
                 <a class="dropdown-item" @click="$('#registerModal').modal('show')">Register</a>
             </div>
             <div class="dropdown-menu" aria-labelledby="myAcc" v-if="app.isLogin">
-                <a class="dropdown-item" href="#">Cabinet</a>
+                <a class="dropdown-item" href="http://localhost:3000/cabinet.html">Cabinet</a>
                 <a class="dropdown-item" @click="handleLogout">Log Out</a>
             </div>
             <modalLogin @handleLogin="handleLogin" :user="{}"></modalLogin>
@@ -64,19 +64,20 @@ Vue.component('modalLogin', {
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
+            <h4>Log In</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <h4>EMAIL ADDRESS<span> *</span></h4>
-            <input type="email" v-model="user.login">
-            <h4>PASSWORD<span> *</span></h4>
-            <input type="password" v-model="user.password">
-            <p>* Required Fields</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" @click="handleLogin(user)" @click="$('#loginModal').modal('hide')">Log In</button>
+            <form @submit.prevent="handleLogin(user); $('#loginModal').modal('hide')">
+                <label for="login">LOGIN*</label>
+                <input type="text" v-model="user.login" name="login" required>
+                <label for="password">PASSWORD*</label>
+                <input type="password" v-model="user.password" name="password" required>
+                <p>* Required Fields</p>
+                <input type="submit" value ="Log In" class="btn btn-primary">
+            </form>
           </div>
         </div>
       </div>
@@ -97,19 +98,20 @@ Vue.component('modalRegister', {
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
+            <h4>Registration</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <h4>EMAIL ADDRESS<span> *</span></h4>
-            <input type="email" v-model="user.login">
-            <h4>PASSWORD<span> *</span></h4>
-            <input type="password" v-model="user.password">
-            <p>* Required Fields</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" @click="handleRegister(user)" @click="$('#registerModal').modal('hide')">Register</button>
+            <form @submit.prevent="handleRegister(user); $('#registerModal').modal('hide')">
+                <label for="login">LOGIN*</label>
+                <input type="text" v-model="user.login" name="login" required>
+                <label for="password">PASSWORD*</label>
+                <input type="password" v-model="user.password" name="password" required>
+                <p>* Required Fields</p>
+                <input type="submit" value ="Register" class="btn btn-primary">
+            </form>
           </div>
         </div>
       </div>
@@ -185,7 +187,8 @@ Vue.component('cart-list', {
     template: `
     <div class="shoppingCart">
         <div class="container">
-            <div class="row shopCartHeading" v-if="cart.length !== 0">
+            <div  v-if="cart.length !== 0">
+            <div class="row shopCartHeading">
                 <div class="col-md-4 details">PRODUCT DETAILS</div>
                 <div class="col-md-2">UNIT PRICE</div>
                 <div class="col-md-2">QUANTITY</div>
@@ -194,7 +197,40 @@ Vue.component('cart-list', {
                 <div class="col-md-1">ACTION</div>
             </div>
             <cart-product @deleteClick="deleteFromCart" v-for="product in cart" :product="product"></cart-product>
-            <div class="total" v-if="cart.length !== 0">Total: $ {{ total }}.00</div>
+            <div class="shopCartButtons">
+                <div class="row container">
+                    <div><button @click="deleteCart">CLEAR SHOPPING CART</button></div>
+                    <div><a href="http://localhost:3000/product.html"><button>CONTINUE SHOPPING</button></a></div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row shipping">
+                    <div class="col-xl-4 col-md-6 col-sm-12 address">
+                        <h4>SHIPPING ADDRESS</h4>
+                        <form>
+                            <input type="text" placeholder="Bangladesh">
+                            <input type="text" placeholder="State">
+                            <input type="text" placeholder="Postcode/ZIP">
+                            <button>GET A QUOTE</button>
+                        </form>
+                    </div>
+                    <div class="col-xl-4 col-md-6 col-sm-12 coupon">
+                        <h4>COUPON DISCOUNT</h4>
+                        <p>Enter your coupon code if you have one</p>
+                        <form>
+                            <input type="text" placeholder="State">
+                            <button>APPLY COUPON</button>
+                        </form>
+                    </div>
+                    <div class="col-xl-4 col-md-12 col-sm-12 total">
+                        <p>SUB TOTAL $ {{ total }}.00</p>
+                        <h5>GRAND TOTAL <span>$ {{ total }}.00</span></h5>
+                        <img src="images/line.png" alt="line">
+                        <a href="http://localhost:3000/checkout.html"><button>PROCEED TO CHECKOUT</button></a>
+                    </div>
+                </div>
+            </div>
+            </div>
             <div class="cartLayoutEmpty" v-if="cart.length === 0">
                 CART IS EMPTY
             </div>
@@ -204,7 +240,10 @@ Vue.component('cart-list', {
     methods: {
         deleteFromCart(product) {
             this.$emit('deleteclick', product);
-        }
+        },
+        deleteCart() {
+            this.$emit('deletecart');
+        },
     },
 });
 
@@ -324,7 +363,7 @@ Vue.component('foot-banner', {
     data() {
         return {
             reviews: [],
-        };
+        }
     },
     template: `
    <div class="footBanner">
@@ -369,6 +408,79 @@ Vue.component('foot-banner', {
     </div>
     </div>
    `,
+   mounted() {
+    fetch(`${API_URL}/reviews`)
+    .then((response) => {
+        this.response = response.status;
+        return response.json();
+    })
+    .then((result) => {
+        this.reviews = result.reviews;
+    });
+   },
+});
+
+Vue.component('cabinet', {
+    props: ["user"],
+    data() {
+        return {
+            review: '',
+        };
+    },
+    template: `
+        <div class="container cabinet" v-if="app.activeUserId !== 0">
+            <div class="userInfo">
+                <h5>user info</h5>
+                <img :src="user.link" alt="user_avatar">
+                <h6>username: <span>{{ user.name }}</span></h6>
+                <h6>email: <span>{{ user.email }}</span></h6>
+                <h6>gender: <span>{{ user.gender }}</span></h6>
+                <h6>bio:</h6>
+                <p>{{ user.bio }}</p>
+                <button @click="$('#changeUserModal').modal('show')">CHANGE</button>
+            </div>
+            <change-user-modal @changeUserInfo="changeUserInfo"></change-user-modal>
+            <div class="reviews">
+                <h5>user reviews</h5>
+                <div class="row">
+                    <div class="col-md-2">Review ID</div>
+                    <div class="col-md-8">Review text</div>
+                    <div class="col-md-2">Action</div>
+                </div>    
+                <div class="review row" v-for="review in app.reviews" v-if="app.reviews.length !== 0">
+                    <div class="col-md-2">{{ review.id }}</div>
+                    <div class="col-md-8">{{ review.text }}</div>
+                    <div class="col-md-2"><i class="fas fa-times-circle" @click="deleteReview(review)"></i></div>
+                </div>
+                <div class="review row" v-for="review in app.reviewsToApprove" v-if="app.isAdmin">
+                    <div class="col-md-2">{{ review.id }}</div>
+                    <div class="col-md-8">{{ review.text }}</div>
+                    <div class="col-md-1"><i class="fas fa-check-circle" @click="approveReview(review)"></i></div>
+                    <div class="col-md-1"><i class="fas fa-times-circle" @click="deleteReview(review)"></i></div>
+                </div>
+            </div>
+            <div class="addReview">
+                <h5>add review</h5>
+                <textarea v-model="review"></textarea>
+                <button @click="addReview">ADD</button>
+            </div>
+        </div>
+    `,
+    methods: {
+        deleteReview(review) {
+            this.$emit('deletereviewclick', review);
+        },
+        addReview() {
+            this.$emit('addreviewclick', this.review);
+            this.review = '';
+        },
+        approveReview(review) {
+            this.$emit('approvereviewclick', review);
+        },
+        changeUserInfo(changedUserInfo) {
+            this.$emit('changeuserinfo', changedUserInfo);
+        },
+    },
     mounted() {
         fetch(`${API_URL}/reviews`)
             .then((response) => {
@@ -378,6 +490,50 @@ Vue.component('foot-banner', {
             .then((result) => {
                 this.reviews = result.reviews;
             });
+    },
+});
+
+Vue.component('change-user-modal', {
+    data() {
+        return {
+            changedUserInfo: {},
+        };
+    },
+    template: `
+    <div class="modal fade" id="changeUserModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4>Change information</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form @submit.prevent="changeUserInfo(); $('#changeUserModal').modal('hide')">
+                <label for="userName">Username</label>
+                <input type="text" id="userName" v-model="changedUserInfo.name">
+                <label for="password">Password</label>
+                <input type="password" id="userPassword" v-model="changedUserInfo.password">
+                <label for="userMail">E-mail</label>
+                <input type="email" id="userMail" v-model="changedUserInfo.email">
+                <label for="gender">Gender</label>
+                <input type="radio" name="gender" value="M" checked v-model="changedUserInfo.gender"><span>M</span>
+                <input type="radio" name="gender" value="F" v-model="changedUserInfo.gender"><span>F</span>
+                <label for="bio">BIO</label>
+                <textarea name="bio" v-model="changedUserInfo.bio"></textarea>
+                <input type="submit" value ="Save" class="btn btn-primary">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    `,
+    methods: {
+        changeUserInfo() {
+            this.$emit('changeUserInfo', this.changedUserInfo);
+            this.changedUserInfo = {};
+        },
     },
 });
 
@@ -395,11 +551,14 @@ const app = new Vue({
         ],
         cart: [],
         reviews: [],
+        reviewsToApprove: [],
         search: '',
         response: '',
         total: 0,
         isLogin: false,
         activeUserId: 0,
+        isAdmin: false,
+        user: {},
     },
     mounted() {
         fetch(`${API_URL}/preferences`)
@@ -410,6 +569,7 @@ const app = new Vue({
             .then((result) => {
                 this.isLogin = result.isLogin;
                 this.activeUserId = result.user_id;
+                this.isAdmin = result.isAdmin;
                 fetch(`${API_URL}/cart/${this.activeUserId}`)
                     .then((response) => {
                         this.response = response.status;
@@ -418,6 +578,23 @@ const app = new Vue({
                     .then((result) => {
                         this.cart = result.products;
                         this.total = result.total;
+                    });
+                fetch(`${API_URL}/users/${this.activeUserId}`)
+                    .then((response) => {
+                        this.response = response.status;
+                        return response.json();
+                    })
+                    .then((result) => {
+                        this.user = result.user;
+                    });
+                fetch(`${API_URL}/reviews/${this.activeUserId}`)
+                    .then((response) => {
+                        this.response = response.status;
+                        return response.json();
+                    })
+                    .then((result) => {
+                        this.reviews = result.reviews;
+                        this.reviewsToApprove = result.reviewsToApprove;
                     });
             });
     },
@@ -475,6 +652,15 @@ const app = new Vue({
                     });
             }
         },
+        deleteCart() {
+            fetch(`${API_URL}/cart/${this.activeUserId}`, {
+                method: 'DELETE',
+            }).then((response) => response.json())
+                .then((result) => {
+                    this.cart = result.cart;
+                    this.total = result.total;
+                });
+        },
         handleLogin(user) {
             fetch(`${API_URL}/auth`, {
                 method: 'POST',
@@ -485,14 +671,30 @@ const app = new Vue({
                 .then((result) => {
                     if (result.auth === 'OK') {
                         this.activeUserId = result.id;
+                        this.isAdmin = result.isAdmin;
                         fetch(`${API_URL}/preferences`, {
                             method: 'PATCH',
                             headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ isLogin: true, user_id: this.activeUserId })
-                        }).then((response) => response.json())
+                            body: JSON.stringify({ isLogin: true, user_id: this.activeUserId, isAdmin: this.isAdmin, })
+                        })
+                            .then((response) => response.json())
                             .then((result) => {
                                 this.isLogin = result.isLogin;
                                 this.activeUserId = result.user_id;
+                                fetch(`${API_URL}/users/${this.activeUserId}`)
+                                    .then((response) => response.json())
+                                    .then((result) => {
+                                        this.user = result.user;
+                                    });
+                                fetch(`${API_URL}/reviews/${this.activeUserId}`)
+                                    .then((response) => {
+                                        this.response = response.status;
+                                        return response.json();
+                                    })
+                                    .then((result) => {
+                                        this.reviews = result.reviews;
+                                        this.reviewsToApprove = result.reviewsToApprove;
+                                    });
                             });
                     }
                     else {
@@ -521,12 +723,55 @@ const app = new Vue({
             fetch(`${API_URL}/preferences`, {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ isLogin: false, user_id: 0 })
+                body: JSON.stringify({ isLogin: false, user_id: 0, isAdmin: false, })
             })
                 .then((response) => response.json())
                 .then((result) => {
                     this.isLogin = result.isLogin;
                     this.activeUserId = result.user_id;
+                    this.user = {};
+                    this.isAdmin = result.isAdmin;
+                    this.reviews = [];
+                });
+        },
+        addReview(review) {
+            fetch(`${API_URL}/reviews`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ user_id: this.activeUserId, user_name: this.user.name, user_avatar: this.user.link, text: review, isApproved: false }),
+            })
+                .then((response) => response.json())
+                .then((result) => {
+                    this.reviews = result.reviews;
+                    this.reviewsToApprove = result.reviewsToApprove;
+                });
+        },
+        deleteReview(review) {
+            fetch(`${API_URL}/reviews/${this.activeUserId}/${review.id}`, {
+                method: 'DELETE',
+            }).then((response) => response.json())
+                .then((result) => {
+                    this.reviews = result.reviews;
+                    this.reviewsToApprove = result.reviewsToApprove;
+                });
+        },
+        approveReview(review) {
+            fetch(`${API_URL}/reviews/${review.id}`, {
+                method: 'PATCH',
+            }).then((response) => response.json())
+                .then((result) => {
+                    this.reviewsToApprove = result.reviewsToApprove;
+                });
+        },
+        changeUserInfo(user) {
+            fetch(`${API_URL}/users/${this.activeUserId}`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ user })
+            })
+                .then((response) => response.json())
+                .then((result) => {
+                  this.user = result.user;
                 });
         },
     }
