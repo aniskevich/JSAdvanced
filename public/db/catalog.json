@@ -2,5 +2,9 @@
     {"id": 1, "name": "Coat", "price": 500, "link": "http://localhost:3000/images/product1.jpg"},
     {"id": 2, "name": "Jacket", "price": 300, "link": "http://localhost:3000/images/product2.jpg"},
     {"id": 3, "name": "Coat", "price": 200, "link": "http://localhost:3000/images/product3.jpg"},
-    {"id": 4, "name": "T-Shirt", "price": 150, "link": "http://localhost:3000/images/product4.jpg"}
+    {"id": 4, "name": "T-Shirt", "price": 150, "link": "http://localhost:3000/images/product4.jpg"},
+    {"id": 5, "name": "Top", "price": 200, "link": "http://localhost:3000/images/product5.jpg"},
+    {"id": 6, "name": "Jacket", "price": 300, "link": "http://localhost:3000/images/product6.jpg"},
+    {"id": 7, "name": "Jeans", "price": 250, "link": "http://localhost:3000/images/product7.jpg"},
+    {"id": 8, "name": "Coat", "price": 350, "link": "http://localhost:3000/images/product8.jpg"}
 ]

@@ -1,0 +1,101 @@
+.checkout {
+    padding: 89px 0 93px 0;
+    .checkoutMenu {
+        border: none;
+        border-bottom: 1px solid #e8e8e8 !important;
+        .checkoutMenuHeader {
+            color: #222222;
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 72px;
+            text-transform: uppercase;
+            display: block;
+            background-color: #fff;
+            border: none;
+        }
+    }
+    .shippingAddress {
+        
+        h2 {
+            margin: 0;
+            height: auto;
+        }
+        h3 {
+            color: #222222;
+            font-size: 13px;
+            text-transform: uppercase;
+        }
+        p {
+            color: #b3b2b2;
+            font-size: 13px;
+            line-height: 20px;
+            font-weight: 300;
+        }
+        .login input {
+            width: 390px;
+            height: 45px;
+            border: 1px solid #eaeaea;
+            background-color: #ffffff;
+            outline: none;
+            padding-left: 10px;
+            @include media-breakpoint-down(lg) {
+                width: auto;
+                min-width: 300px;
+            }
+            @include media-breakpoint-down(md) {
+                min-width: 250px;
+            }
+        }
+        .login .forgot {
+            color: #222222;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 20px;
+            display: inline-block;
+            margin-left: 30px;
+            text-decoration: none;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+        h4 {
+            color: #222222;
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 20px;
+        }
+        button {
+            width: 180px;
+            height: 50px;
+            border: 1px solid #eaeaea;
+            background-color: #ffffff;
+            color: #4a4a4a;
+            font-size: 14px;
+            font-weight: 700;
+        }
+        .register button {
+            margin-top: 30px;
+        }
+        @include media-breakpoint-down(sm) {
+            flex-direction: column;
+            &>div:not(:first-child) {
+                margin-top: 35px;
+            }
+            .forgot {
+                margin-top: 15px;
+            }
+        }
+    }
+}
+.checkout .shippingAddress .login span,
+.checkout .shippingAddress .login p:nth-child(odd) {
+    color: red;
+}
+.checkout .shippingAddress .register form > div {
+    padding: 10px 0;
+}
+.checkout .shippingAddress .register form .arrows {
+    margin: 0;
+    background: url(../images/arrows.png) no-repeat 5px;
+    padding-left: 20px;
+}

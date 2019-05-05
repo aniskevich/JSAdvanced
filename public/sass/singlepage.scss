@@ -1,0 +1,186 @@
+.singlePageBanner {
+    background-color: #f7f7f7;
+    text-align: center;
+    padding: 70px 0;
+        .carousel-control-prev {
+            height: 47px;
+            width: 47px;
+            background: url(../images/Arrow.jpg);
+            top: calc(50% - 23px);
+        }
+        .carousel-control-next {
+            height: 47px;
+            width: 47px;
+            background: url(../images/Arrow_copy.jpg);
+            top: calc(50% - 23px);
+        }
+        ol {
+            list-style-type: none;
+            top: 405px;
+            .active {
+                background-color: #f16d7f;
+                border: 1px solid #f16d7f;
+            }
+            li {
+                width: 55px;
+                height: 1px;
+                margin: 0;
+                border: 1px solid #4d4d4d;
+                background-color: #4d4d4d;
+                &:hover {
+                    border: 1px solid #f16d7f;
+                    background-color: #f16d7f;
+                }
+            }
+        }
+    }    
+.description {
+        border: 1px solid #eaeaea;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-top: -50px;
+        background-color: #fff;
+        padding-top: 73px;
+        padding-bottom: 137px;
+        .descInside {
+            width: 640px;
+            text-align: center;
+            h4 {
+                color: #f16d7f;
+                font-size: 14px;
+                font-weight: 700;
+                line-height: 24px;
+                text-transform: uppercase;
+                margin-bottom: 15px;
+            }
+            h3 {
+                color: #4d4d4d;
+                font-size: 18px;
+                font-weight: 400;
+                line-height: 24px;
+                text-transform: uppercase;
+                margin-bottom: 67px;
+            }
+            p {
+                color: #5e5e5e;
+                font-size: 14px;
+                font-weight: 300;
+                line-height: 24px;
+                margin-bottom: 28px;
+            }
+            .material {
+                display: flex;
+                justify-content: space-between;
+                width: 334px;
+                margin: 0 auto 37px auto;
+                h4 {
+                    color: #b9b9b9;
+                    font-size: 14px;
+                    font-weight: 700;
+                    line-height: 24px;
+                    text-transform: uppercase;
+                    span {
+                        color: #2f2f2f;
+                    }
+                }
+            }
+            .cost {
+                color: #ef5b70;
+                font-size: 24px;
+                font-weight: 700;
+                line-height: 24px;
+                border-bottom: 1px solid #eaeaea;
+                margin: 0;
+                padding-bottom: 43px;
+            }
+            .options {
+                margin: 63px auto 28px auto;
+                form {
+                    display: flex;
+                    justify-content: space-between;
+                    margin: 0 auto;
+                    width: 540px;
+                    text-align: left;
+                    flex-wrap: wrap;
+                    & > div {
+                        display: flex;
+                        flex-direction: column;
+                    }
+                }
+                label {
+                    color: #2f2f2f;
+                    font-size: 14px;
+                    font-weight: 700;
+                    line-height: 24px;
+                    text-transform: uppercase;
+                    margin-bottom: 16px;
+                    text-align: center;
+                }
+                #selectColor,
+                #selectSize,
+                input {
+                    width: 144px;
+                    height: 35px;
+                    border: 1px solid #eaeaea;
+                    background-color: #ffffff;
+                    color: #bcbcbc;
+                    font-size: 13px;
+                    font-weight: 400;
+                    line-height: 24px;
+                    outline: none;
+                    padding-left: 5px;
+                    text-transform: uppercase;
+                }
+            }
+            #buyBtn {
+                width: 537px;
+                height: 55px;
+                border: 1px solid #ef5b70;
+                background-color: #ffffff;
+                color: #ef5b70;
+                font-size: 16px;
+                font-weight: 700;
+                background: url(../images/cartred.png) no-repeat 200px center;
+                padding-left: 50px;
+                outline: none;
+                margin-top: 20px;
+                text-transform: unset;
+            }
+            @include media-breakpoint-down(sm) {
+                
+                    width: auto;
+                    .material, .options {
+                        flex-direction: column;
+                        width: auto;
+                        text-align: center;
+                    }
+                    button {
+                        width: auto;
+                        padding: 0 40px;
+                    }
+                    .options h4 {
+                        margin: 0;
+                    }
+                    .options select {
+                        margin-bottom: 15px;
+                    }
+            
+            }
+        }
+    }
+    
+.alsoLike {
+        padding-top: 120px;
+        padding-bottom: 73px;
+        h2 {
+            color: #4d4d4d;
+            font-size: 24px;
+            font-weight: 400;
+            line-height: 20px;
+            text-transform: uppercase;
+            margin-bottom: 72px;
+            text-align: center;
+        }
+    }

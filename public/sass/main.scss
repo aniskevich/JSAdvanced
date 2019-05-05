@@ -1,0 +1,205 @@
+.topBannerWrap {
+    height: 610px;
+    background-color: #e8e8e8;
+    @include media-breakpoint-down(lg) {
+        margin-bottom: 15px;
+    }
+}
+.topBannerContent {
+    height: inherit;
+    background: url(../images/topHeaderBack.png) no-repeat 554px 0;
+    background-size: 550px;
+    display: flex;
+    align-items: center;
+    @include media-breakpoint-down(lg) {
+        background-position: unset;
+        justify-content: flex-end;
+    }
+}
+
+.topBannerSign {
+    height: 92px;
+    border-left: 12px solid #f16d7f;
+    padding-left: 12px;
+    @include media-breakpoint-down(lg) {
+        margin-top: 40%;
+        color: #f16d7f;
+    }
+    div:first-child {
+        font-weight: 900;
+        font-size: 60px;
+        line-height: 41px;
+    }
+    div:last-child {
+        font-weight: 400;
+        font-size: 40px;
+        line-height: 32px;
+        margin-top: 19px;
+    }
+}
+.offers {
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    height: 823px;
+    @include media-breakpoint-down(lg) {
+        height: auto;
+        flex-wrap: nowrap;
+        align-items: center;
+        &>div:not(:last-child) {
+            margin-bottom: 15px;
+        }
+    }
+    .label {
+        position: absolute;
+        top: 25px;
+        padding: 15px 20px;
+        background: white;
+        text-transform: uppercase;
+        @include media-breakpoint-down(md) {
+            bottom: 25px;
+            top: unset;
+            right: 0;
+            padding: 1px 5px;
+        }
+    }
+}
+.offers > div {
+    position: relative;
+    height: auto;
+    img {
+        @include media-breakpoint-down(xs) {
+            width: 290px;
+        }
+    }
+}
+.labelTop {
+    font-size: 18px;
+    color: #222222;
+    font-weight: 700;
+}
+.labelBottom {
+    font-size: 30px;
+    color: #f16d7f;
+    font-weight: 900;
+}
+.featuredItemsWrap {
+    margin-top: 50px;
+    padding-top: 50px;
+}
+.featuredHead {
+    font-size: 30px;
+    font-weight: 700;
+    text-align: center;
+}
+.featuredDesc {
+    text-align: center;
+    color: #9f9f9f;
+    font-size: 14px;
+    margin-top: 15px;
+    @include media-breakpoint-down(xs) {
+        width: 220px;
+        margin: 0 auto;
+    }
+}
+.featuredItems {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    @include media-breakpoint-down(sm) {
+        justify-content: center;
+    }
+}
+
+.featuredAllProductsBtn {
+    outline: none;
+    &:hover {
+    text-decoration: none;
+    }
+    button {
+        padding: 18px 24px;
+        background: #f16d7f;
+        border: none;
+        color: white;
+        font-size: 16px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        margin: 60px auto 110px;
+        img {
+            margin-left: 10px;
+        }
+    }
+}
+.offerForWomen {
+    margin-bottom: 100px;
+    @include media-breakpoint-down(md) {
+        margin-bottom: 20px;
+    }
+}
+.offerForWomenBanner {
+    height: inherit;
+    width: 767px;
+    background: url(../images/offerForWomen.jpg) no-repeat;
+    background-size: cover;
+    position: relative;
+    background-position: center;
+    min-height: 600px;
+}
+.offerText {
+    position: absolute;
+    top: 146px;
+    left: 40px;
+    color: #ffffff;
+    div:first-child {
+        font-size: 54px;
+        font-weight: 700;
+        span {
+            color: #f16d7f;
+        }
+    }
+    div:last-child {
+        font-size: 32px;
+    }
+}
+.offerDetails {
+    display: flex;
+    flex-direction: column;
+    background-color: #222224;
+    color: #fbfbfb;
+    align-items: center;
+}
+.offerUnit {
+    padding: 30px 30px 30px 110px;
+    flex-grow: 1;
+    &:first-child {
+        background: url(../images/offerDetails1.png) no-repeat 36px 30px;
+    }
+    &:nth-child(2) {
+        background: url(../images/offerDetails2.png) no-repeat 36px 30px;
+    }
+    &:last-child {
+        background: url(../images/offerDetails3.png) no-repeat 36px 30px;
+    }
+    @include media-breakpoint-down(lg) {
+        &:nth-child(n) {
+            padding-left: 95px;
+        }
+    }
+    @include media-breakpoint-down(md) {
+        &:nth-child(n) {   
+            background-position: 25px;
+            max-width: 500px;
+        }
+    }
+}
+.offerDetailsHead {
+    font-size: 20px;
+    font-weight: 700;
+}
+.offerDetailsText {
+    line-height: 24px;
+    margin-top: 15px;
+    text-align: justify;
+    font-size: 14px;
+}

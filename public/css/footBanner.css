@@ -7028,6 +7028,8 @@ a.text-dark:hover, a.text-dark:focus {
     justify-content: space-between; }
   .footBanner div[class^="col"] {
     width: 350px; }
+  .footBanner .carousel-indicators {
+    top: 180px; }
   .footBanner .divider {
     height: 438px;
     width: 1px;
@@ -7047,13 +7049,8 @@ a.text-dark:hover, a.text-dark:focus {
     font-weight: 700;
     letter-spacing: 0.4px;
     line-height: 26px;
-    margin: 0; }
-  .footBanner h4 {
-    color: #222224;
-    font-size: 12px;
-    font-weight: 300;
-    line-height: 26px;
-    margin: 0; }
+    margin: 0;
+    text-transform: capitalize; }
   .footBanner .label {
     text-align: center; }
     .footBanner .label h3 {
@@ -7076,7 +7073,8 @@ a.text-dark:hover, a.text-dark:focus {
       height: 46px;
       border-radius: 0 23px 23px 0;
       background-color: #f16d7f;
-      border-color: #f16d7f; }
+      border-color: #f16d7f;
+      outline: none; }
       .footBanner form button:hover {
         color: #f16d7f;
         background-color: #fff;

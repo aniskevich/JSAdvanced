@@ -86,7 +86,6 @@ header {
             @include media-breakpoint-down(md) {
                 max-width: 340px;
             }
-            
             img {
                 max-width: 32px;
                 height: 29px;
@@ -101,10 +100,40 @@ header {
                 outline: none;
                 font-size: 15px;
                 font-weight: 400;
-                line-height: 32px;
                 letter-spacing: 0.38px;
                 margin-left: 20px;
+            }
+            .dropdown-menu {
+                background-color: #f16d7f;
+                padding: 0;
+                margin: 0;
+                a {
+                    border: 1px solid #fff;
+                    color: #fff;
+                    &:hover {
+                        color: #f16d7f;
+                    }
+                }  
+            }
+            #registerModal, #loginModal {
+                .modal-header {
+                    h4 {
+                        text-transform: uppercase;
+                    }
+                }
+                .modal-body {
+                    form {
+                        display: flex;
+                        flex-direction: column;
+                        input {
+                            padding-left: 5px;
+                        }
+                        .btn {
+                            background-color: #f16d7f;
+                        }
+                    }
                 }
             }
         }
+    }
 }
