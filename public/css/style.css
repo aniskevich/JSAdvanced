@@ -64787,24 +64787,34 @@ a.text-dark:hover, a.text-dark:focus {
       margin-top: 20px; }
 
 .singlePageBanner {
-  background: url(../images/singlePageBanner.jpg) no-repeat;
   background-color: #f7f7f7;
-  position: relative;
-  height: 777px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: -1;
-  background-size: contain;
-  background-position: center; }
-  .singlePageBanner .prev {
+  text-align: center;
+  padding: 70px 0; }
+  .singlePageBanner .carousel-control-prev {
     height: 47px;
     width: 47px;
-    background: url(../images/Arrow.jpg); }
-  .singlePageBanner .next {
+    background: url(../images/Arrow.jpg);
+    top: calc(50% - 23px); }
+  .singlePageBanner .carousel-control-next {
     height: 47px;
     width: 47px;
-    background: url(../images/Arrow_copy.jpg); }
+    background: url(../images/Arrow_copy.jpg);
+    top: calc(50% - 23px); }
+  .singlePageBanner ol {
+    list-style-type: none;
+    top: 405px; }
+    .singlePageBanner ol .active {
+      background-color: #f16d7f;
+      border: 1px solid #f16d7f; }
+    .singlePageBanner ol li {
+      width: 55px;
+      height: 1px;
+      margin: 0;
+      border: 1px solid #4d4d4d;
+      background-color: #4d4d4d; }
+      .singlePageBanner ol li:hover {
+        border: 1px solid #f16d7f;
+        background-color: #f16d7f; }
 
 .description {
   border: 1px solid #eaeaea;
@@ -64826,17 +64836,6 @@ a.text-dark:hover, a.text-dark:focus {
       line-height: 24px;
       text-transform: uppercase;
       margin-bottom: 15px; }
-    .description .descInside ul {
-      list-style-type: none;
-      padding: 0;
-      display: flex;
-      justify-content: center; }
-      .description .descInside ul li {
-        width: 63px;
-        height: 1px;
-        border: 1px solid #eaeaea; }
-        .description .descInside ul li:hover {
-          border: 1px solid #f16d7f; }
     .description .descInside h3 {
       color: #4d4d4d;
       font-size: 18px;
@@ -64872,18 +64871,25 @@ a.text-dark:hover, a.text-dark:focus {
       margin: 0;
       padding-bottom: 43px; }
     .description .descInside .options {
-      display: flex;
-      justify-content: space-between;
-      width: 540px;
-      text-align: left;
       margin: 63px auto 28px auto; }
-      .description .descInside .options h4 {
+      .description .descInside .options form {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 auto;
+        width: 540px;
+        text-align: left;
+        flex-wrap: wrap; }
+        .description .descInside .options form > div {
+          display: flex;
+          flex-direction: column; }
+      .description .descInside .options label {
         color: #2f2f2f;
         font-size: 14px;
         font-weight: 700;
         line-height: 24px;
         text-transform: uppercase;
-        margin-bottom: 16px; }
+        margin-bottom: 16px;
+        text-align: center; }
       .description .descInside .options #selectColor,
       .description .descInside .options #selectSize,
       .description .descInside .options input {
@@ -64896,8 +64902,9 @@ a.text-dark:hover, a.text-dark:focus {
         font-weight: 400;
         line-height: 24px;
         outline: none;
-        padding-left: 5px; }
-    .description .descInside button {
+        padding-left: 5px;
+        text-transform: uppercase; }
+    .description .descInside #buyBtn {
       width: 537px;
       height: 55px;
       border: 1px solid #ef5b70;
@@ -64907,7 +64914,9 @@ a.text-dark:hover, a.text-dark:focus {
       font-weight: 700;
       background: url(../images/cartred.png) no-repeat 200px center;
       padding-left: 50px;
-      outline: none; }
+      outline: none;
+      margin-top: 20px;
+      text-transform: unset; }
     @media (max-width: 767.98px) {
       .description .descInside {
         width: auto; }

@@ -170,7 +170,7 @@ Vue.component('product', {
                 <h3 class="card-text">$ {{ product.price }}.00</h3>
             </div>
             <div class="buyFade">
-                <button @click="addToCart(product)">Add to Cart</button>
+                <a href="http://localhost:3000/singlepage.html"><button @click="addToCart(product)">Add to Cart</button></a>
             </div>
         </div>
     </div>
@@ -180,6 +180,110 @@ Vue.component('product', {
             this.$emit('buyClick', product);
         }
     }
+});
+
+Vue.component('single-product', {
+    data() {
+        return {
+            product: {},
+            computedProduct: {},
+        };
+    },
+    template:`
+    <div>
+    <div class="singlePageBanner">
+        <div id="carouselSinglePage" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselSinglePage" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselSinglePage" data-slide-to="1"></li>
+                <li data-target="#carouselSinglePage" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                <img :src="product.link">
+                </div>
+                <div class="carousel-item">
+                <img :src="product.link">
+                </div>
+                <div class="carousel-item">
+                <img :src="product.link">
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselSinglePage" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselSinglePage" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="description">
+            <div class="descInside">
+                <h4>{{ product.category }} COLLECTION</h4>
+                <h3>{{ product.name }}</h3>
+                <p>{{ product.description }}</p>
+                <div class="material">
+                    <h4>MATERIAL: <span>{{ product.material }}</span></h4>
+                    <h4>DESIGNER: <span>{{ product.designer }}</span></h4>
+                </div>
+                <h3 class="cost">$ {{ product.price }}.00</h3>
+                <div class="options">
+                    <form @submit.prevent="handleBuy">
+                    <div>
+                        <label for="selectColor">Choose color</label>
+                        <select name="selectColor" id="selectColor">
+                            <option v-for="(option, index) in product.color" :value="option" class="{ 'active': index === 0 }">{{ option }}</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="selectSize">Choose size</label>
+                        <select name="selectSize" id="selectSize">
+                            <option v-for="(option, index) in product.size" :value="option" class="{ 'active': index === 0 }">{{ option }}</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="selectQuantity">Quantity</label>
+                        <input type="number" v-model.number="computedProduct.quantity" name="selectQuantity" required>
+                    </div>
+                    <input type="submit" value="Add to Cart" id="buyBtn">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="alsoLike">
+            <h2>you may like also</h2>
+        </div>
+    </div>
+    </div>
+    `,
+    mounted() {
+        fetch(`${API_URL}/preferences/product`)
+            .then((response) => {
+                this.response = response.status;
+                return response.json();
+            })
+            .then((result) => {
+                fetch(`${API_URL}/stock/${result.currentProduct}`)
+                    .then((response) =>
+                        response.json()
+                    )
+                    .then((result) => {
+                        this.product = result;
+                        this.product.quantity = 1;
+                        this.computedProduct = Object.assign({}, this.product);
+                    });
+            });
+    },
+    methods: {
+        handleBuy() {
+            this.computedProduct.color = event.target.selectColor.value;
+            this.computedProduct.size = event.target.selectSize.value;
+            this.$emit('handlebuy', this.computedProduct);
+        },
+    },
 });
 
 Vue.component('cart-list', {
@@ -546,10 +650,12 @@ const app = new Vue({
             { name: 'women', link: "http://localhost:3000/product.html" },
             { name: 'kids', link: "http://localhost:3000/product.html" },
             { name: 'accessoriese', link: "http://localhost:3000/product.html" },
-            { name: 'featured', link: "#" },
-            { name: 'hot deals', link: "#" },
+            { name: 'featured', link: "http://localhost:3000/product.html" },
+            { name: 'hot deals', link: "http://localhost:3000/product.html" },
         ],
         cart: [],
+        product: {},
+        currentProduct: 0,
         reviews: [],
         reviewsToApprove: [],
         search: '',
@@ -603,39 +709,22 @@ const app = new Vue({
             this.search = query;
         },
         addToCart(product) {
-            const cartItem = this.cart.find(cartItem => cartItem.id === product.id);
-            if (cartItem) {
-                fetch(`${API_URL}/cart/${this.activeUserId}`, {
-                    method: 'PATCH',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ product_id: product.id, quantity: ++cartItem.quantity, subtotal: cartItem.price * cartItem.quantity })
-                })
-                    .then((response) => response.json())
-                    .then((result) => {
-                        const itemIdx = this.cart.findIndex(cartItem => cartItem.id === product.id);
-                        Vue.set(this.cart, itemIdx, result.product);
-                        this.total = result.total;
-                    });
-            }
-            else {
-                fetch(`${API_URL}/cart/${this.activeUserId}`, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ ...product, quantity: 1, subtotal: product.price, }),
-                })
-                    .then((response) => response.json())
-                    .then((result) => {
-                        this.cart.push(result.product);
-                        this.total = result.total;
-                    });
-            }
+            fetch(`${API_URL}/preferences/product`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ currentProduct: product.id, })
+            })
+                .then((response) => response.json())
+                .then((result) => {
+                    this.currentProduct = result.currentProduct;
+                });
         },
         deleteFromCart(product) {
             if (product.quantity > 1) {
                 fetch(`${API_URL}/cart/${this.activeUserId}`, {
                     method: 'PATCH',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ product_id: product.id, quantity: --product.quantity, subtotal: product.price * product.quantity })
+                    body: JSON.stringify({ product_id: product.id, quantity: --product.quantity, subtotal: product.price * product.quantity, color: product.color, size: product.size,  })
                 }).then((response) => response.json())
                     .then((result) => {
                         const itemIdx = this.cart.findIndex(cartItem => cartItem.id === product.id);
@@ -643,11 +732,11 @@ const app = new Vue({
                         this.total = result.total;
                     });
             } else {
-                fetch(`${API_URL}/cart/${this.activeUserId}/${product.id}`, {
+                fetch(`${API_URL}/cart/${this.activeUserId}/${product.id}/${product.color}/${product.size}`, {
                     method: 'DELETE',
                 }).then((response) => response.json())
                     .then((result) => {
-                        this.cart = this.cart.filter((cartItem) => cartItem.id !== product.id);
+                        this.cart = result.cart;
                         this.total = result.total;
                     });
             }
@@ -660,6 +749,34 @@ const app = new Vue({
                     this.cart = result.cart;
                     this.total = result.total;
                 });
+        },
+        handleBuy(product) {
+                const cartItem = this.cart.find(cartItem => ((cartItem.id === product.id) && (cartItem.size === product.size) && (cartItem.color === product.color)));
+                if (cartItem) {
+                        fetch(`${API_URL}/cart/${this.activeUserId}`, {
+                            method: 'PATCH',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ product_id: product.id, quantity: cartItem.quantity + product.quantity, subtotal: cartItem.price * (cartItem.quantity + product.quantity), color: product.color, size: product.size, })
+                        })
+                            .then((response) => response.json())
+                            .then((result) => {
+                                const itemIdx = this.cart.findIndex(cartItem => cartItem.id === product.id);
+                                Vue.set(this.cart, itemIdx, result.product);
+                                this.total = result.total;
+                            });
+                }
+                else {
+                    fetch(`${API_URL}/cart/${this.activeUserId}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ ...product, subtotal: product.price * product.quantity, }),
+                    })
+                        .then((response) => response.json())
+                        .then((result) => {
+                            this.cart.push(result.product);
+                            this.total = result.total;
+                        });
+                }
         },
         handleLogin(user) {
             fetch(`${API_URL}/auth`, {

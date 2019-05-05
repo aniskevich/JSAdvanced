@@ -53,67 +53,7 @@
             </div>
         </div>
     </div>
-    <div class="singlePageBanner">
-        <div class="prev">
-
-        </div>
-        <div class="next">
-
-        </div>
-    </div>
-    <div class="container">
-        <div class="description">
-            <div class="descInside">
-                <h4>WOMEN COLLECTION</h4>
-                <ul>
-                    <li><a href="#"></a></li>
-                    <li><a href="#"></a></li>
-                    <li><a href="#"></a></li>
-                </ul>
-                <h3>Moschino Cheap And Chic</h3>
-                <p>
-                    Compellingly actualize fully researched processes before proactive outsourcing.
-                    Progressively syndicate collaborative architectures before cutting-edge services.
-                    Completely visualize parallel core competencies rather than exceptional portals.
-                </p>
-                <div class="material">
-                    <h4>MATERIAL: <span>COTTON</span></h4>
-                    <h4>DESIGNER: <span>BINBURHAN</span></h4>
-                </div>
-                <h3 class="cost">$561</h3>
-                <div class="options">
-                    <div>
-                        <h4>Choose color</h4>
-                        <select name="selectColor" id="selectColor">
-                            <option value="red" selected>Red</option>
-                            <option value="green">Green</option>
-                            <option value="blue">Blue</option>
-                        </select>
-                    </div>
-                    <div>
-                        <h4>Choose size</h4>
-                        <select name="selectSize" id="selectSize">
-                            <option value="XXS">XXS</option>
-                            <option value="XS">XS</option>
-                            <option value="S">S</option>
-                            <option value="M">M</option>
-                            <option value="XL">XL</option>
-                            <option value="XXL" selected>XXL</option>
-                        </select>
-                    </div>
-                    <div>
-                        <h4>Quantity</h4>
-                        <input type="text" placeholder="2">
-                    </div>
-                </div>
-                <button>Add to Cart</button>
-            </div>
-        </div>
-        <div class="alsoLike">
-            <h2>you may like also</h2>
-            <items-list :query="search" @buyclick="addToCart"></items-list>
-        </div>
-    </div>
+    <single-product :product="product" @handlebuy="handleBuy"></single-product>
     <foot-banner></foot-banner>
         <foot></foot>
         <copy></copy>

@@ -20,6 +20,19 @@ app.get('/catalog', (req, res) => {
     });
 });
 
+app.get('/stock/:id', (req, res) => {
+    fs.readFile('./public/db/stock.json', 'utf-8', (err, data) => {
+        if (err) {
+            res.send('Нет такого файла');
+        }
+        let product = JSON.parse(data);
+        product = product.filter(prop => {
+            return +prop.id === +req.params.id;
+        });
+        res.send(product[0]);
+    });
+});
+
 app.get('/cart/:user', (req, res) => {
     fs.readFile('./public/db/cart.json', 'utf-8', (err, data) => {
         if (err) {
@@ -104,7 +117,7 @@ app.patch('/cart/:user', (req, res) => {
             return +userCart.user_id === +req.params.user;
         });
         tmpCart[0].products = tmpCart[0].products.map((product) => {
-            if (+product.id === +req.body.product_id) {
+            if ((+product.id === +req.body.product_id) && (product.color === req.body.color) && (product.size === req.body.size)) {
                 product.quantity = req.body.quantity;
                 product.subtotal = req.body.subtotal;
             }
@@ -123,25 +136,33 @@ app.patch('/cart/:user', (req, res) => {
     });
 });
 
-app.delete('/cart/:user/:id', (req, res) => {
+app.delete('/cart/:user/:id/:color/:size', (req, res) => {
     fs.readFile('./public/db/cart.json', 'utf-8', (err, data) => {
         if (err) {
             res.send('Нет такого файла');
         }
         let cart = JSON.parse(data);
-        let tmpCart = cart.filter(userCart => {
+        let userCart = cart.filter(userCart => {
             return +userCart.user_id === +req.params.user;
         });
-        tmpCart[0].products = tmpCart[0].products.filter(product => {
-            return +product.id !== +req.params.id;
-        });
+        const tmpCart = [];
+        for (product of userCart[0].products) {
+            if ((+product.id === +req.params.id) && (product.size === req.params.size) && (product.color === req.params.color)) {
+                continue;
+            }
+            else {
+                tmpCart.push(product);
+            }
+        }
         cart = cart.filter(userCart => {
             return +userCart.user_id !== +req.params.user;
         });
-        cart.push(tmpCart[0]);
+        userCart = { user_id: +req.params.user, products: tmpCart };
+        cart.push(userCart);
         fs.writeFile('./public/db/cart.json', JSON.stringify(cart), () => {
             res.send({
-                total: tmpCart[0].products.reduce((acc, product) => acc + product.subtotal, 0)
+                cart: userCart.products,
+                total: userCart.products.reduce((acc, product) => acc + product.subtotal, 0),
             });
         });
     })
@@ -218,12 +239,24 @@ app.get('/preferences', (req, res) => {
     });
 });
 
+app.get('/preferences/product', (req, res) => {
+    fs.readFile('./public/db/preferences.json', 'utf-8', (err, data) => {
+        if (err) {
+            res.send('Нет такого файла');
+        }
+        const prefs = JSON.parse(data);
+        res.send({
+            currentProduct: prefs[0].currentProduct,
+        });
+    });
+});
+
 app.patch('/preferences', (req, res) => {
     fs.readFile('./public/db/preferences.json', 'utf-8', (err, data) => {
         if (err) {
             res.send('Нет такого файла');
         }
-        let prefs = JSON.parse(data);
+        const prefs = JSON.parse(data);
         prefs[0].isLogin = req.body.isLogin;
         prefs[0].user_id = req.body.user_id;
         prefs[0].isAdmin = req.body.isAdmin;
@@ -232,6 +265,21 @@ app.patch('/preferences', (req, res) => {
                 isLogin: prefs[0].isLogin,
                 user_id: prefs[0].user_id,
                 isAdmin: prefs[0].isAdmin,
+            });
+        });
+    });
+});
+
+app.patch('/preferences/product', (req, res) => {
+    fs.readFile('./public/db/preferences.json', 'utf-8', (err, data) => {
+        if (err) {
+            res.send('Нет такого файла');
+        }
+        const prefs = JSON.parse(data);
+        prefs[0].currentProduct = req.body.currentProduct;
+        fs.writeFile('./public/db/preferences.json', JSON.stringify(prefs), () => {
+            res.send({
+                currentProduct: prefs[0].currentProduct,
             });
         });
     });

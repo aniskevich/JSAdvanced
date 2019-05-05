@@ -1,23 +1,37 @@
 .singlePageBanner {
-    background: url(../images/singlePageBanner.jpg) no-repeat;
     background-color: #f7f7f7;
-    position: relative;
-    height: 777px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: -1;
-    background-size: contain;
-    background-position: center;
-        .prev {
+    text-align: center;
+    padding: 70px 0;
+        .carousel-control-prev {
             height: 47px;
             width: 47px;
-            background: url(../images/Arrow.jpg)
+            background: url(../images/Arrow.jpg);
+            top: calc(50% - 23px);
         }
-        .next {
+        .carousel-control-next {
             height: 47px;
             width: 47px;
-            background: url(../images/Arrow_copy.jpg)
+            background: url(../images/Arrow_copy.jpg);
+            top: calc(50% - 23px);
+        }
+        ol {
+            list-style-type: none;
+            top: 405px;
+            .active {
+                background-color: #f16d7f;
+                border: 1px solid #f16d7f;
+            }
+            li {
+                width: 55px;
+                height: 1px;
+                margin: 0;
+                border: 1px solid #4d4d4d;
+                background-color: #4d4d4d;
+                &:hover {
+                    border: 1px solid #f16d7f;
+                    background-color: #f16d7f;
+                }
+            }
         }
     }    
 .description {
@@ -40,20 +54,6 @@
                 line-height: 24px;
                 text-transform: uppercase;
                 margin-bottom: 15px;
-            }
-            ul {
-                list-style-type: none;
-                padding: 0;
-                display: flex;
-                justify-content: center;
-                li {
-                    width: 63px;
-                    height: 1px;
-                    border: 1px solid #eaeaea;
-                    &:hover {
-                        border: 1px solid #f16d7f;
-                    }
-                }
             }
             h3 {
                 color: #4d4d4d;
@@ -96,18 +96,27 @@
                 padding-bottom: 43px;
             }
             .options {
-                display: flex;
-                justify-content: space-between;
-                width: 540px;
-                text-align: left;
                 margin: 63px auto 28px auto;
-                h4 {
+                form {
+                    display: flex;
+                    justify-content: space-between;
+                    margin: 0 auto;
+                    width: 540px;
+                    text-align: left;
+                    flex-wrap: wrap;
+                    & > div {
+                        display: flex;
+                        flex-direction: column;
+                    }
+                }
+                label {
                     color: #2f2f2f;
                     font-size: 14px;
                     font-weight: 700;
                     line-height: 24px;
                     text-transform: uppercase;
                     margin-bottom: 16px;
+                    text-align: center;
                 }
                 #selectColor,
                 #selectSize,
@@ -122,9 +131,10 @@
                     line-height: 24px;
                     outline: none;
                     padding-left: 5px;
+                    text-transform: uppercase;
                 }
             }
-            button {
+            #buyBtn {
                 width: 537px;
                 height: 55px;
                 border: 1px solid #ef5b70;
@@ -135,6 +145,8 @@
                 background: url(../images/cartred.png) no-repeat 200px center;
                 padding-left: 50px;
                 outline: none;
+                margin-top: 20px;
+                text-transform: unset;
             }
             @include media-breakpoint-down(sm) {
                 
